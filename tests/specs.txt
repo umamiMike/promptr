@@ -1,0 +1,24 @@
+1. when givn two string inputs should return an array.
+I:"String","String"
+O:[]
+
+2. first element of array should be a key "no_of_occurences" and a number as the value
+I: "string""string string"
+O: ["no_of_occurences" => "2"]
+
+3. The second element of the array should be an array we will call stringArray. This will become important later in the story.
+I: "string""string string"
+O: ["no_of_occurences" => "2",[]]
+
+4. 3rd element in array equals input1
+I:"String","The String"
+O: [["no_of_occurences" => "1"],[[0] => "The ",[1] => "String"],"String"]
+
+5. The stringArray should contain an array of strings.;
+I: "string""its a string its a string"
+O: ["no_of_occurences" => "2",[["its a "],["string"], ["its a "],["string"]]]
+
+
+6.  returns the array formatted in such a way I can make css transformations on the input1 string.
+I: "string""It's string, it's string. String is better than bad it's GOOD!"
+O: [["no_of_occurences" => "2"],Array ( [0] => It's [1] => string, [2] => it's [3] => string. [4] => String [5] => is [6] => better [7] => than [8] => bad [9] => it's [10] => GOOD! ),"String"]
