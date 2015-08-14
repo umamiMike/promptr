@@ -1,13 +1,13 @@
 ##
 # Silex Twig Template
 
-##### _Template for getting up and going with a Silex/Twig app.
+##### _Template for getting up and going with a Silex/Twig app._
 
 #### Mike Chastain
 
 ## Description
 
-_Add a Description Here
+_Add a Description Here_
 
 ## Setup
 
