@@ -29,6 +29,7 @@
         function save()
         {
             $GLOBALS['DB']->exec("INSERT INTO topics (name) VALUES ('{$this->getName()}');");
+            $this->id = $GLOBALS['DB']->lastInsertId();
         }
 
         static function getAll()
@@ -42,6 +43,24 @@
                 array_push($topics, $new_topic);
             }
             return $topics;
+        }
+
+        static function deleteAll()
+        {
+            $GLOBALS['DB']->exec("DELETE FROM topics;");
+        }
+
+        static function find($search_id)
+        {
+            $found_topic = null;
+            $topics = Topic::getAll();
+            foreach($topics as $topic){
+                $id = $topic->getId();
+                if($search_id == $id){
+                    $found_topic = $topic;
+                }
+            }
+            return $found_topic;
         }
 
     }
