@@ -5,6 +5,7 @@
     */
 
     require_once "src/Topic.php";
+    require_once "src/Promptr.php";
 
     $server = 'mysql:host=localhost;dbname=promptr_app_test';
     $username = 'root';
@@ -16,6 +17,7 @@
         protected function tearDown()
         {
             Topic::deleteAll();
+            Promptr::deleteAll();
         }
 
         function test_getName()
