@@ -30,7 +30,7 @@ class Question {
     function getDescription()
     {
         return $this->description;
-    }    
+    }
 
     function setId($new_id)
     {
@@ -40,6 +40,11 @@ class Question {
     function getId()
     {
         return $this->id;
+    }
+
+    function save()
+    {
+        
     }
 
 

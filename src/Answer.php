@@ -7,7 +7,7 @@ class Answer {
 
     function __construct($ans, $quest_id, $id = null)
     {
-        $this->question_id = $quest_id;
+        $this->question_id = (int) $quest_id;
         $this->answer = $ans;
         $this->id = $id;
     }
@@ -48,7 +48,7 @@ class Answer {
         $this->id = $GLOBALS['DB']->lastInsertId();
     }
 
-    function getAll()
+    static function getAll()
     {
         $returned_answers = $GLOBALS['DB']->query("SELECT * FROM answers;");
         $answers = [];
@@ -57,6 +57,7 @@ class Answer {
             $quest_id = $answer['question_id'];
             $id = $answer['id'];
             $new_answer = new Answer($field, $quest_id, $id);
+            //var_dump($new_answer);
             array_push($answers, $new_answer);
         }
         return $answers;
@@ -64,7 +65,7 @@ class Answer {
 
     static function deleteAll()
     {
-        
+        $GLOBALS['DB']->exec("DELETE FROM answers;");
     }
 
 
