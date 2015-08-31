@@ -7,8 +7,8 @@ class Question {
 
     function __construct($quest, $desc, $id = null)
     {
-        $this->$question = $quest;
-        $this->$description = $desc;
+        $this->question = $quest;
+        $this->description = $desc;
         $this->id = $id;
     }
 
@@ -44,7 +44,41 @@ class Question {
 
     function save()
     {
-        
+        $GLOBALS['DB']->exec("INSERT INTO questions (question, description) VALUES ('{$this->getQuestion()}', '{$this->getDescription()}');");
+        $this->id = $GLOBALS['DB']->lastInsertId();
+    }
+
+    static function findById($search_id)
+    {
+        $found_question = null;
+        $returned_questions = Question::getAll();
+        foreach($returned_questions as $question){
+            $id = $question->getId();
+            if($search_id == $id){
+                $found_question = $question;
+            }
+        }
+        return $found_question;
+    }
+
+    static function getAll()
+    {
+        $returned_questions = $GLOBALS['DB']->query("SELECT * FROM questions;");
+        //var_dump($returned_questions);
+        $questions = [];
+        foreach($returned_questions as $question){
+            $field = $question['question'];
+            $description = $question['description'];
+            $id = $question['id'];
+            $new_question = new Question($field, $description, $id);
+            array_push($questions, $new_question);
+        }
+        return $questions;
+    }
+
+    static function deleteAll()
+    {
+        $GLOBALS['DB']->exec("DELETE FROM questions;");
     }
 
 
