@@ -8,6 +8,11 @@
   <body>
       <div class="container">
 
+          {% embed "create_promptr_form.html.twig" %}
+
+          {% endembed %}
+
+<!--
           <h1 style="text-align:center">Welcome to Promptr!</h1>
           <h2>A Brainstorming Aid</h2>
           <div class="col-md-8">
@@ -39,8 +44,10 @@
               <h3>Popular Promptrs</h3>
               <ul>
               {% for promptr in promptrs %}
-                <li> <a href="/promptr/{id}">{{ promptr.getName}}</a></li>
-            {% endfor %}
+                <li> <a href="/promptrs/{{ promptr.getId }}">{{ promptr.getName }}</a></li>
+            {% endfor %} -->
+
+
 
 
           </div>

@@ -29,19 +29,12 @@
         return $app['twig']->render('index.html.twig', array('topics' => $topics, 'promptrs' => $promptrs));
     });
 
-    $app->post("/admin_start", function() use ($app){
-        $topic_name = $_POST['topic'];
-        $topic = new Topic($topic_name);
-        $topic->save();
-        $admin = true;
-        $questions = Question::getAll();
-        return $app['twig']->render('admin.html.twig', array('admin' => $admin, 'topic' => $topic, 'questions' => $questions));
-    });
+    $app->get("/promptr/{id}", function($id) use ($app){
 
-    $app->get("/admin_start", function() use ($app){
-        $admin = true;
-        $questions = Question::getAll();
-        return $app['twig']->render('admin.html.twig', array('admin' => $admin, 'questions' => $questions));
+        $promptr = Promptr::find($id);
+
+        return $app['twig']->render('index.html.twig', array ('promptr' => $promptr,'questions' => $promptr->getQuestions()));
+
     });
 
     return $app;
