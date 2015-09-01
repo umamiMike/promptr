@@ -1,0 +1,34 @@
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Promptr</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+
+    <style media="screen">
+        .container{
+
+            width:800px;
+        }
+    </style>
+  </head>
+  <body>
+      <div class="container">
+
+          {% embed "create_promptr_form.html.twig" %}
+
+          {% endembed %}
+          <br>
+          <br>
+
+          {% embed "create_topic_form.html.twig" %}
+
+          {% endembed %}
+
+          </div>
+      </div>
+
+      <a href="/deleteAllPromptrs">delete all promptrs</a>
+
+  </body>
+</html>

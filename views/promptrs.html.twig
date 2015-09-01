@@ -1,0 +1,25 @@
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Promptrs Page</title>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+    </head>
+    <body>
+<div class="container">
+
+
+        {% embed "create_promptr_form.html.twig" %}
+
+        {% endembed %}
+
+        {% for promptr in promptrs  %}
+            <a href="promptr/{{ promptr.getId }}"> {{ promptr.getName }}</a>
+            <br>
+        {%  endfor %}
+
+        <br>
+        <a href="/deleteAllPromptrs">delete all promptrs</a>
+    </div>
+    </body>
+</html>
