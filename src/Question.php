@@ -48,6 +48,18 @@ class Question {
         $this->id = $GLOBALS['DB']->lastInsertId();
     }
 
+    function delete()
+    {
+        $GLOBALS['DB']->exec("DELETE FROM questions WHERE id = {$this->getId()};");
+    }
+
+    function update($new_question, $new_description)
+    {
+        $GLOBALS['DB']->exec("UPDATE questions (question, description) WHERE id = {$this->getId()} VALUES ('{$new_question}', '{$new_description}');");
+        $this->question = $new_question;
+        $this->description = $new_description;
+    }
+
     static function findById($search_id)
     {
         $found_question = null;

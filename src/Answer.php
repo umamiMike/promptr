@@ -48,6 +48,31 @@ class Answer {
         $this->id = $GLOBALS['DB']->lastInsertId();
     }
 
+    function delete()
+    {
+        $GLOBALS['DB']->exec("DELETE FROM answers WHERE id = {$this->getId()};");
+    }
+
+    function update($new_answer)
+    {
+        $GLOBALS['DB']->exec("UPDATE answers (answer) WHERE id = {$this->getId()} VALUES ('{$new_answer}');");
+        $this->answer = $new_answer;
+    }
+
+    static function findById($search_id)
+    {
+        $found_answer = null;
+        $returned_answers = Answer::getAll();
+        foreach($returned_answers as $answer){
+            $id = $answer->getId();
+            if($search_id == $id){
+                $found_answer = $answer;
+            }
+        }
+        return $found_answer;
+    }
+
+
     static function getAll()
     {
         $returned_answers = $GLOBALS['DB']->query("SELECT * FROM answers;");
