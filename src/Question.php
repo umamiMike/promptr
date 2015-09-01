@@ -51,6 +51,8 @@ class Question {
     function delete()
     {
         $GLOBALS['DB']->exec("DELETE FROM questions WHERE id = {$this->getId()};");
+        $GLOBALS['DB']->exec("DELETE FROM answers WHERE question_id = {$this->getId()};");
+
     }
 
     function update($new_question, $new_description)
@@ -58,6 +60,25 @@ class Question {
         $GLOBALS['DB']->exec("UPDATE questions (question, description) WHERE id = {$this->getId()} VALUES ('{$new_question}', '{$new_description}');");
         $this->question = $new_question;
         $this->description = $new_description;
+    }
+
+    function getAnswers()
+    {
+        $answers = [];
+        $returned_answers = $GLOBALS['DB']->query("SELECT * FROM answers WHERE question_id = {$this->getId()};");
+        foreach($returned_answers as $answer){
+            $field = $answer['answer'];
+            $question_id = $answer['question_id'];
+            $id = $answer['id'];
+            $new_answer = new Answer($field, $question_id, $id);
+            array_push($answers, $new_answer);
+        }
+        return $answers;
+    }
+
+    function addAnswer($id)
+    {
+        $GLOBALS['DB']->exec("INSERT INTO answers (question, description, id) WHERE id = {$id} VALUES ('{$this->getQuestion()}', '{$this->getDescription()}', {$this->getId()});");
     }
 
     static function findById($search_id)
