@@ -21,13 +21,13 @@
     Request::enableHttpMethodParameterOverride();
 
 
+    $app->get("/", function() use ($app){
 
-
-    $app->get("/admin", function() use ($app){
         $topics = Topic::getAll();
         $promptrs = Promptr::getAll();
         return $app['twig']->render('promptr-admin.twig', array('topics' => $topics, 'promptrs' => $promptrs));
     });
+
 
     $app->get("/promptr/{id}", function($id) use ($app){
 
@@ -54,6 +54,20 @@
         return $app['twig']->render('promptrs.html.twig', array ('promptrs' => Promptr::getAll()));
 
     });
+
+
+    $app->get("/topic/{id}", function($id) use ($app){
+        $topic = Topic::find($id);
+        $promptrs = $topic->getPromptrs();
+        return $app['twig']->render("topic.html.twig", array('topic' => $topic, 'promptrs' => $promptrs));
+    });
+
+    $app->get("promptr/{id}", function($id) use ($app){
+        $promptr = Promptr::find($id);
+        $questions = $promptr->getQuestions();
+        return $app['twig']->render("promptr.html.twig", array('promptr' => $promptr, 'questions' => $questions));
+    });
+
 
 
 
