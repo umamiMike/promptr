@@ -7,39 +7,31 @@
     </head>
     <body>
         {% if admin == true %}
-
+        <div class="container">
             <h2>Create questions for your promptr</h2>
 
             <label for="promptr_name">Enter the name for your Promptr:</label>
             <input id="promptr_name" name="promptr_name" type="text">
             <button type="submit" class="btn-md">Enter</button>
 
-            {% if questions is empty %}
-                <form action="/add_question" method="post">
-            {% else %}
-                <form action="/add_question/{id}" method="post">
-            {% endif %}
-                <div class="form-group">
-                    <input id="id" name="id" class="hidden" value="{{ question.getId }}"
-                    <label for="question">Add Question</label>
-                    <input class="form-control" id="question" name="question" type="text" required autofocus>
-                    <br>
-                </div
-                <button type="submit" class="btn-md">Add Question/Answer</button>
-            </form>
 
-        {% else %}
-            <ul>
-            {% for question in questions %}
-                <li>{{ question.getQuestion }}</li>
-                </ul>
+                    {% for question in questions %}
+                        <form action="/admin_start" method="post">
+                            <div class="form-group">
+                                <label for="question">Add Question</label>
+                                <input class="form-control" id="question" name="question" type="text" required autofocus>
+                                <br>
+                            </div>
+                            <button type="submit" class="btn-md">Add Question/Answer</button>
+                        </form>
+                    {% endfor %}
+
+                <div>
                 <textarea placeholder="This is an awesome comment box" rows="20" name="answer" id="comment_text" cols="40" class="ui-autocomplete-input" autocomplete="off" role="textbox" aria-autocomplete="list" aria-haspopup="true" required></textarea>
                 <input class="form-control" id="answer" name="answer" value="">
                 </div>
                 <button type="submit" class="btn-md">Add Question/Answer</button>
 
-            </form>
-            {{ endfor }}
-        {{ endif }}
+        {% endif %}
     </body>
 </html>
