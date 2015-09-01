@@ -32,6 +32,17 @@
             $this->id = $GLOBALS['DB']->lastInsertId();
         }
 
+        function update($new_name)
+        {
+            $GLOBALS['DB']->exec("UPDATE topics SET name = '{$new_name}' WHERE id = {$this->getId()};");
+            $this->name = $new_name;
+        }
+
+        function delete()
+        {
+            $GLOBALS['DB']->exec("DELETE FROM topics WHERE id = {$this->getId()};");
+        }
+
         static function getAll()
         {
             $returned_topics = $GLOBALS['DB']->query("SELECT * FROM topics ORDER BY name;");
@@ -61,6 +72,22 @@
                 }
             }
             return $found_topic;
+        }
+
+        function getPromptrs()
+        {
+            $returned_promptrs = $GLOBALS['DB']->query("SELECT * FROM promptrs WHERE topic_id = {$this->getId()};");
+            $promptrs = array();
+            foreach($returned_promptrs as $promptr){
+                $name = $promptr['name'];
+                $topic_id = $promptr['topic_id'];
+                $trending = $promptr['trending'];
+                $example = $promptr['example'];
+                $id = $promptr['id'];
+                $new_promptr = new Promptr($name, $topic_id, $trending, $example, $id);
+                array_push($promptrs, $new_promptr);
+            }
+            return $promptrs;
         }
 
     }

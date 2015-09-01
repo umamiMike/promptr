@@ -109,5 +109,61 @@
 
             $this->assertEquals($test_topic, $result);
         }
+
+        function test_delete()
+        {
+            $name = "Writing";
+            $test_topic = new Topic($name);
+            $test_topic->save();
+
+            $name2 = "Interview";
+            $test_topic2 = new Topic($name2);
+            $test_topic2->save();
+
+            $test_topic->delete();
+            $result = Topic::getAll();
+
+            $this->assertEquals([$test_topic2], $result);
+        }
+
+        function test_update()
+        {
+            $name = "Writing";
+            $test_topic = new Topic($name);
+            $test_topic->save();
+
+            $name2 = "Interview";
+
+            $test_topic->update($name2);
+            $topics = Topic::getAll();
+            $result = $topics[0]->getName();
+
+            $this->assertEquals($name2, $result);
+        }
+
+        function test_getPromptrs()
+        {
+            $name = "Writing";
+            $test_topic = new Topic($name);
+            $test_topic->save();
+
+            $name2 = "Interview";
+            $test_topic2 = new Topic($name2);
+            $test_topic2->save();
+
+            $promptr_name = "mikes 5 tips";
+            $topic_id = $test_topic->getId();
+            $test_promptr = new Promptr($promptr_name, $topic_id);
+            $test_promptr->save();
+
+            $promptr_name2 = "ians 5 tips";
+            $topic_id = $test_topic->getId();
+            $test_promptr2 = new Promptr($promptr_name2, $topic_id);
+            $test_promptr2->save();
+
+            $result = $test_topic->getPromptrs();
+
+            $this->assertEquals([$test_promptr, $test_promptr2], $result);
+        }
     }
 ?>

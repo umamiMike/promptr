@@ -8,7 +8,7 @@
 
     require_once 'src/Answer.php';
 
-    $server = 'mysql:host=localhost;dbname=promptr_test';
+    $server = 'mysql:host=localhost;dbname=promptr_app_test';
     $username = 'root';
     $password = 'root';
     $DB = new PDO($server, $username, $password);
