@@ -99,6 +99,47 @@
 
         }
 
+        function test_delete()
+        {
+            //Arrange
+            $test_field = "What is their name?";
+            $test_description = "What you want to call your character.";
+            $test_question = new Question($test_field, $test_description);
+            $test_question->save();
+
+            $test_field2= "What is their profession?";
+            $test_description2 = "What you want your character to do.";
+            $test_question2 = new Question($test_field2, $test_description2);
+            $test_question2->save();
+
+            //Act
+            $test_question->delete();
+            $result = Question::getAll();
+
+            //Assert
+            $this->assertEquals($test_question2, $result[0]);
+        }
+
+        function test_update()
+        {
+            //Arrange
+            $test_field = "What is their name?";
+            $test_description = "What you want to call your character.";
+            $test_question = new Question($test_field, $test_description);
+            $test_question->save();
+
+            $new_quest = "How tall are they?";
+            $new_desc = "The height you want your character to be.";
+
+            //Act
+            $test_question->update($new_quest, $new_desc);
+
+            //Assert
+            $this->assertEquals(["How tall are they?", "The height you want your character to be."], [$test_question->getQuestion(), $test_question->getDescription()]);
+
+
+        }
+
 
       }
 
