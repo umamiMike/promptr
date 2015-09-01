@@ -1,27 +1,27 @@
-##
-# Silex Twig Template
+# Promptr
 
-##### _Template for getting up and going with a Silex/Twig app._
+##### _A Templating engine for writing prompts and brainstorming._
 
-#### Mike Chastain
+#### Mike Chastain, Ian McKenney, Don Schemmel, Chris Lytsell.
 
 ## Description
 
-_Add a Description Here_
+_Do you want to develop a character?  Do you want to write a letter and make sure you say everything you need to say?  This app aims to help you do that by providing a simple way of asking yourself something and then being able to answer._
 
 ## Setup
-
-Add your setup information instructions here.
-
 ```
 $ composer install
 ```
 
+```
+mysql instructions should go here
+
+```
 _then start up a local PHP server from within the "web" directory within the project's folder and point your browser to whatever local host server you have created._  
 
 ## Technologies Used
 
-_This project makes use of PHP, the testing framework [PHPUnit](https://phpunit.de/), the micro-framework [Silex](http://silex.sensiolabs.org/), and uses [Twig](http://twig.sensiolabs.org/) templates._
+_This project makes use of PHP, the testing framework [PHPUnit](https://phpunit.de/), the micro-framework [Silex](http://silex.sensiolabs.org/), and uses [Twig](http://twig.sensiolabs.org/) templates.  and mysql for the database._
 
 ## To Do
 
@@ -31,7 +31,7 @@ _This project makes use of PHP, the testing framework [PHPUnit](https://phpunit.
 
 
 
-Copyright (c) 2015 Mike Chastain
+Copyright (c) 2015 Mike Chastain, Ian McKenney, Don Schemmel, Chris Lytsell.  
 
 This software is licensed under the MIT license.
 
