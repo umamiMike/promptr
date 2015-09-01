@@ -8,7 +8,10 @@
     require_once "src/Question.php";
     require_once 'src/Answer.php';
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> master
     $server = 'mysql:host=localhost;dbname=promptr_app_test';
     $username = 'root';
     $password = 'root';
