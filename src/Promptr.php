@@ -124,7 +124,28 @@
             return $found_promptr;
         }
 
+        function addQuestion($question)
+        {
+            $GLOBALS['DB']->exec("INSERT INTO questions (question, description) VALUES ('{$question->getQuestion()}', '{$question->getDescription()}');");
+        }
 
+        function getQuestions()
+        {
+            $query = $GLOBALS['DB']->query("SELECT questions.* FROM
+                promptrs JOIN promptrs_questions ON (promptrs.id = promptrs_questions.promptr_id)
+                         JOIN questions ON (promptrs_questions.question_id = questions.id)
+                         WHERE promptrs.id = {$this->getId()};");
+            $returned_questions = $query->fetchAll(PDO::FETCH_ASSOC);
+            $questions = array();
+            foreach($returned_questions as $question){
+                $quest = $question['question'];
+                $description = $question['description'];
+                $id = $question['id'];
+                $new_question = new Question($quest, $description, $id);
+                array_push($questions, $new_question);
+            }
+            return $questions;
+        }
 
 
     }

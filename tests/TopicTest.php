@@ -165,5 +165,26 @@
 
             $this->assertEquals([$test_promptr, $test_promptr2], $result);
         }
+
+        function test_addPromptr()
+        {
+            $name = "Writing";
+            $test_topic = new Topic($name);
+            $test_topic->save();
+
+            $name2 = "Interview";
+            $test_topic2 = new Topic($name2);
+            $test_topic2->save();
+
+            $promptr_name = "mikes 5 tips";
+            $topic_id = $test_topic->getId();
+            $test_promptr = new Promptr($promptr_name, $topic_id);
+            $test_topic->addPromptr($test_promptr);
+
+            $result = $test_topic->getPromptrs();
+            $end_promptr = new Promptr($promptr_name, $topic_id, 0, 0, $result[0]->getId());
+
+            $this->assertEquals([$end_promptr], $result);
+        }
     }
 ?>

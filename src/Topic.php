@@ -90,6 +90,12 @@
             return $promptrs;
         }
 
+        function addPromptr($promptr)
+        {
+            $GLOBALS['DB']->exec("INSERT INTO promptrs (name, topic_id, trending, example) VALUES ('{$promptr->getName()}',{$promptr->getTopicId()},{$promptr->getTrending()}, {$promptr->getExample()});");
+        }
+
+        
     }
 
 

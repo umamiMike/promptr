@@ -6,6 +6,7 @@
 
     require_once "src/Promptr.php";
     require_once "src/Topic.php";
+    require_once "src/Question.php";
 
     $server = 'mysql:host=localhost;dbname=promptr_app_test';
     $username = 'root';
@@ -18,6 +19,7 @@
         {
            Topic::deleteAll();
            Promptr::deleteAll();
+           Question::deleteAll();
         }
 
 
@@ -159,6 +161,23 @@
           $result = $promptrs[0]->getName();
 
           $this->assertEquals($promptr2_name, $result);
+        }
+
+        function test_addQuestion()
+        {
+            $name = "mikes 5 top interview questions";
+            $test_promptr = new Promptr($name);
+            $test_promptr->save();
+
+            $question = "What is your biggest weakness punk?";
+            $description = "This question goes straight for the jugular";
+            $test_question = new Question($question, $description);
+            $test_promptr->addQuestion($test_question);
+
+            $result = Question::getAll();
+            $end_question = new Question($question, $description, $result[0]->getId());
+
+            $this->assertEquals([$end_question], $result);
         }
 
     }
