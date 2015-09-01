@@ -1,0 +1,40 @@
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Promptr</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+  </head>
+  <body>
+      <div class="container">
+
+          <h1 style="text-align:center">Welcome to Promptr!</h1>
+          <h2>A Brainstorming Aid</h2>
+          <div class="col-md-8">
+          <ul>
+            {% for topic in topics %}
+                <li><a href="/topic/{id}">{{ topic.getName }}</a></li>
+            {% endfor %}
+         </ul>
+
+
+          <h4>Helpful Links</h4>
+          <ul>
+              <li><a href="http://www.writersdigest.com/online-editor/novel-writing-10-questions-you-need-to-ask-your-characters">www.writersdigest.com</a></li>
+              <li><a href="http://www.dailywritingtips.com">www.dailywritingtips.com</a></li>
+          </ul>
+          </div>
+          <div class="col-md-4">
+              <a href="/admin">Admin</a>
+              <h3>Popular Promptrs</h3>
+              <ul>
+              {% for promptr in promptrs %}
+                <li> <a href="/promptr/{id}">{{ promptr.getName}}</a></li>
+            {% endfor %}
+
+
+          </div>
+      </div>
+
+  </body>
+</html>
