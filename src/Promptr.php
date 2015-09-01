@@ -75,6 +75,18 @@
             $this->id = $GLOBALS['DB']->lastInsertId();
         }
 
+        function delete()
+        {
+            $GLOBALS['DB']->exec("DELETE FROM promptrs WHERE id = {$this->getId()};");
+            $GLOBALS['DB']->exec("DELETE FROM promptrs_questions WHERE promptr_id = {$this->getId()};");
+        }
+
+        function updateName($new_name)
+        {
+            $GLOBALS['DB']->exec("UPDATE promptrs SET name = '{$new_name}' WHERE id = {$this->getId()};");
+            $this->setName($new_name);
+        }
+
         static function getAll()
         {
             $returned_promptrs = $GLOBALS['DB']->query("SELECT * FROM promptrs;");
