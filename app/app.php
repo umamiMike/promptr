@@ -32,9 +32,10 @@
         return $app['twig']->render('index.html.twig', array('topics' => $topics, 'promptrs' => $promptrs));
     });
 
-    $app->get("/admin", function() use ($app){
+    $app->get("/admin_start", function() use ($app){
+        $admin = true;
         $questions = Question::getAll();
-        return $app['twig']->render("admin.html.twig", array('questions' => $question));
+        return $app['twig']->render('admin.html.twig', array('admin' => $admin, 'questions' => $questions));
     });
 
     return $app;

@@ -25,7 +25,19 @@
           </ul>
           </div>
           <div class="col-md-4">
-              <a href="/admin">Admin</a>
+              
+              <form action="/add_question/{id}" method="post">
+          {% endif %}
+              <div class="form-group">
+                  <input id="id" name="id" class="hidden" value="{{ question.getId }}"
+                  <label for="question">Add Question</label>
+                  <input class="form-control" id="question" name="question" type="text" required autofocus>
+                  <br>
+              </div
+              <button type="submit" class="btn-md">Add Question/Answer</button>
+          </form>
+
+              <a href="/admin_start">Admin</a>
               <h3>Popular Promptrs</h3>
               <ul>
               {% for promptr in promptrs %}
