@@ -25,17 +25,15 @@
           </ul>
           </div>
           <div class="col-md-4">
-              
-              <form action="/add_question/{id}" method="post">
-          {% endif %}
+
+              <form action="/admin_start" method="post">
               <div class="form-group">
-                  <input id="id" name="id" class="hidden" value="{{ question.getId }}"
-                  <label for="question">Add Question</label>
-                  <input class="form-control" id="question" name="question" type="text" required autofocus>
+                  <label for="topic">What topic will this promptr be under</label>
+                  <input class="form-control" id="topic" name="topic" type ="text">
                   <br>
-              </div
-              <button type="submit" class="btn-md">Add Question/Answer</button>
-          </form>
+              </div>
+              <button id="topic" type="submit" class="btn-md">Add Topic</button>
+            </form>
 
               <a href="/admin_start">Admin</a>
               <h3>Popular Promptrs</h3>

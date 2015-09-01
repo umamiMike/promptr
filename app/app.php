@@ -32,10 +32,13 @@
         return $app['twig']->render('index.html.twig', array('topics' => $topics, 'promptrs' => $promptrs));
     });
 
-    $app->get("/admin_start", function() use ($app){
+    $app->post("/admin_start", function() use ($app){
+        $topic_name = $_POST['topic'];
+        $topic = new Topic($topic_name);
+        $topic->save();
         $admin = true;
         $questions = Question::getAll();
-        return $app['twig']->render('admin.html.twig', array('admin' => $admin, 'questions' => $questions));
+        return $app['twig']->render('admin.html.twig', array('admin' => $admin, 'topic' => $topic, 'questions' => $questions));
     });
 
     return $app;
