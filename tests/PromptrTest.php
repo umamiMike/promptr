@@ -77,10 +77,20 @@
 
         }
 
-        // function testDelete()
-        // {
-        //
-        // }
+        function testDelete()
+        {
+          $promptr1_name = "mikes 5 tips";
+          $topic_id  = 20;
+          $promptr1_id = 200;
+          $test_promptr = new Promptr($promptr1_name,$topic_id);
+          $test_promptr->save();
+          $test_promptr->delete();
+
+          $result = Promptr::getAll();
+          //var_dump($result);
+          $this->assertEquals([],$result);
+
+        }
         //
         function testDeleteAll()
         {
@@ -134,10 +144,22 @@
             $this->assertEquals($test_promptr, $result);
         }
 
-        // function testUpdate()
-        // {
-        //
-        // }
+        function testUpdateName()
+        {
+          $promptr1_name = "mikes 5 tips";
+          $topic_id  = 20;
+          $promptr1_id = 200;
+          $test_promptr = new Promptr($promptr1_name,$topic_id);
+
+          $test_promptr->save();
+
+          $promptr2_name = "ians 5 tips";
+          $test_promptr->updateName($promptr2_name);
+          $promptrs = Promptr::getAll();
+          $result = $promptrs[0]->getName();
+
+          $this->assertEquals($promptr2_name, $result);
+        }
 
     }
 ?>
