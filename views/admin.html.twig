@@ -6,6 +6,19 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
     </head>
     <body>
+        <h2>Create Question</h2>
+        <form action="/question_added" method="post">
+            <div class="form-group">
+                <label for="question">Add Question</label>
+                <input class="form-control" id="question" name="question" type="text" required autofocus>
+                <br>
+
+            <textarea placeholder="This is an awesome comment box" rows="20" name="answer" id="comment_text" cols="40" class="ui-autocomplete-input" autocomplete="off" role="textbox" aria-autocomplete="list" aria-haspopup="true" required></textarea>
+            <input class="form-control" id="answer" name="answer" value="">
+            </div>
+            <button type="submit" class="btn-md">Add Question/Answer</button>
+
+        </form>
 
 
     </body>

@@ -6,7 +6,7 @@
     require_once __DIR__."/../src/Promptr.php";
 
     $app = new Silex\Application();
-<<<<<<< HEAD
+//<<<<<<< HEAD
     $app['debug'] = true;
 
     $server = 'mysql:host=localhost;dbname=promptr_app';
@@ -19,12 +19,12 @@
 
     use Symfony\Component\HttpFoundation\Request;
     Request::enableHttpMethodParameterOverride();
-=======
+//=======
     $app['debug']  = true;
     $app->register(new Silex\Provider\TwigServiceProvider(),array(
         'twig.path' => __DIR__.'/../views'
     ));
->>>>>>> master
+//>>>>>>> master
 
     $app->get("/", function() use ($app){
         $topics = Topic::getAll();
@@ -32,7 +32,10 @@
         return $app['twig']->render('index.html.twig', array('topics' => $topics, 'promptrs' => $promptrs));
     });
 
-    $app->post("/admin")
+    $app->get("/admin", function() use ($app){
+        $questions = Question::getAll();
+        return $app['twig']->render("admin.html.twig", array('questions' => $question));
+    });
 
     return $app;
     ?>
