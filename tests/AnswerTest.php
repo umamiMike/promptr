@@ -7,6 +7,7 @@
     //All tests passed
 
     require_once 'src/Answer.php';
+    require_once "src/Question.php";
 
     $server = 'mysql:host=localhost;dbname=promptr_app_test';
     $username = 'root';
@@ -18,6 +19,7 @@
         protected function tearDown()
         {
             Answer::deleteAll();
+            Question::deleteAll();
         }
         function test_save()
         {

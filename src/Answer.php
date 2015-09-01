@@ -1,14 +1,14 @@
 <?php
 
 class Answer {
-    private $question_id;
     private $answer;
+    private $question_id;
     private $id;
 
     function __construct($ans, $quest_id, $id = null)
     {
-        $this->question_id = (int) $quest_id;
         $this->answer = $ans;
+        $this->question_id = (int) $quest_id;
         $this->id = $id;
     }
 

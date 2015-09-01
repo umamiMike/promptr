@@ -6,6 +6,7 @@
     require_once __DIR__."/../src/Promptr.php";
 
     $app = new Silex\Application();
+
     $app['debug'] = true;
 
     $server = 'mysql:host=localhost;dbname=promptr_app';
@@ -21,10 +22,20 @@
 
 
 
+
     $app->get("/", function() use ($app){
         $topics = Topic::getAll();
         $promptrs = Promptr::getAll();
         return $app['twig']->render('index.html.twig', array('topics' => $topics, 'promptrs' => $promptrs));
+    });
+
+    $app->post("/admin_start", function() use ($app){
+        $topic_name = $_POST['topic'];
+        $topic = new Topic($topic_name);
+        $topic->save();
+        $admin = true;
+        $questions = Question::getAll();
+        return $app['twig']->render('admin.html.twig', array('admin' => $admin, 'topic' => $topic, 'questions' => $questions));
     });
 
     $app->get("/admin_start", function() use ($app){

@@ -6,7 +6,12 @@
     //All tests passed
 
     require_once "src/Question.php";
+    require_once 'src/Answer.php';
 
+<<<<<<< HEAD
+
+=======
+>>>>>>> master
     $server = 'mysql:host=localhost;dbname=promptr_app_test';
     $username = 'root';
     $password = 'root';
@@ -18,6 +23,8 @@
         protected function tearDown()
         {
             Question::deleteAll();
+            Answer::deleteAll();
+
         }
 
         function test_save()
@@ -140,7 +147,30 @@
 
         }
 
+        function test_getAnswers()
+        {
+            //Arrange
+            $test_field = "What is their name?";
+            $test_description = "What you want to call your character.";
+            $test_question = new Question($test_field, $test_description);
+            $test_question->save();
 
-      }
+            $test_field = "Joe GetAll";
+            $test_quest_id = $test_question->getId();
+            $test_answer = new Answer($test_field, $test_quest_id);
+            $test_answer->save();
+
+            //Act
+            $test_question->addAnswer($test_answer->getId());
+
+            //Assert
+            $result = $test_question->getAnswers($test_answer->getId());
+            $this->assertEquals($test_answer, $result[0]);
+
+
+        }
+
+
+    }
 
       ?>
