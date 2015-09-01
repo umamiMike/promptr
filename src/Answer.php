@@ -48,6 +48,17 @@ class Answer {
         $this->id = $GLOBALS['DB']->lastInsertId();
     }
 
+    function delete()
+    {
+        $GLOBALS['DB']->exec("DELETE FROM answers WHERE id = {$this->getId()};");
+    }
+
+    function update($new_answer)
+    {
+        $GLOBALS['DB']->exec("UPDATE answers (answer) WHERE id = {$this->getId()} VALUES ('{$new_answer}');");
+        $this->answer = $new_answer;
+    }
+
     static function findById($search_id)
     {
         $found_answer = null;

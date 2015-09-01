@@ -83,7 +83,7 @@
             $test_quest_id = 1;
             $test_answer = new Answer($test_field, $test_quest_id);
             $test_answer->save();
-  
+
             $test_field2 = "Red FindById";
             $test_quest_id2 = 2;
             $test_answer2 = new Answer($test_field2, $test_quest_id2);
@@ -97,8 +97,43 @@
 
         }
 
+        function test_delete()
+        {
+            //Arrange
+            $test_field = "Joe FindById";
+            $test_quest_id = 1;
+            $test_answer = new Answer($test_field, $test_quest_id);
+            $test_answer->save();
 
+            $test_field2 = "Red FindById";
+            $test_quest_id2 = 2;
+            $test_answer2 = new Answer($test_field2, $test_quest_id2);
+            $test_answer2->save();
 
+            //Act
+            $test_answer->delete();
+            $result = Answer::getAll();
+
+            //Assert
+            $this->assertEquals($test_answer2, $result[0]);
+
+        }
+
+        function test_update()
+        {
+            //Arrange
+            $test_field = "Joe Update";
+            $test_quest_id = 1;
+            $test_answer = new Answer($test_field, $test_quest_id);
+            $test_answer->save();
+
+            //Act
+            $new_answer = "Sam Update";
+            $test_answer->update($new_answer);
+
+            //Assert
+            $this->assertEquals("Sam Update", $test_answer->getAnswer());
+        }
       }
 
       ?>
