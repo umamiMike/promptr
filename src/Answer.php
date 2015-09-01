@@ -48,6 +48,20 @@ class Answer {
         $this->id = $GLOBALS['DB']->lastInsertId();
     }
 
+    static function findById($search_id)
+    {
+        $found_answer = null;
+        $returned_answers = Answer::getAll();
+        foreach($returned_answers as $answer){
+            $id = $answer->getId();
+            if($search_id == $id){
+                $found_answer = $answer;
+            }
+        }
+        return $found_answer;
+    }
+
+
     static function getAll()
     {
         $returned_answers = $GLOBALS['DB']->query("SELECT * FROM answers;");

@@ -76,6 +76,28 @@
             $this->assertEquals([], $result);
         }
 
+        function test_findById()
+        {
+            //Arrange
+            $test_field = "Joe FindById";
+            $test_quest_id = 1;
+            $test_answer = new Answer($test_field, $test_quest_id);
+            $test_answer->save();
+  
+            $test_field2 = "Red FindById";
+            $test_quest_id2 = 2;
+            $test_answer2 = new Answer($test_field2, $test_quest_id2);
+            $test_answer2->save();
+
+            //Act
+            $result = Answer::findById($test_answer->getId());
+
+            //Assert
+            $this->assertEquals($test_answer, $result);
+
+        }
+
+
 
       }
 
