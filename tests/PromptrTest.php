@@ -180,5 +180,28 @@
             $this->assertEquals([$end_question], $result);
         }
 
+        function test_getQuestions()
+        {
+            $name = "mikes 5 top interview questions";
+            $test_promptr = new Promptr($name);
+            $test_promptr->save();
+
+            $question = "What is your biggest weakness punk?";
+            $description = "This question goes straight for the jugular";
+            $test_question = new Question($question, $description);
+            $test_promptr->addQuestion($test_question);
+
+            $question2 = "Who are you really?";
+            $description2 = "I mean really really";
+            $test_question2 = new Question($question2, $description2);
+            $test_promptr->addQuestion($test_question2);
+
+            $result = Question::getAll();
+            $end_question = new Question($question, $description, $result[0]->getId());
+            $end_question2= new Question($question2, $description2, $result[1]->getId());
+
+            $this->assertEquals([$end_question,$end_question2], $result);
+        }
+
     }
 ?>
