@@ -2,6 +2,7 @@
   <head>
     <meta charset="utf-8">
     <title>Promptr</title>
+    <link rel="stylesheet" href="/css/styles.css" media="screen" charset="utf-8">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
   </head>
@@ -9,11 +10,12 @@
       <div class="container">
 
           <h1 style="text-align:center">Welcome to Promptr!</h1>
-          <h2>A Brainstorming Aid</h2>
+          <h2>A List of Topics</h2>
           <div class="col-md-8">
           <ul>
             {% for topic in topics %}
-                <li><a href="/topic/{id}">{{ topic.getName }}</a></li>
+                <li><a href="/topic/{{ topic.getId }}">{{ topic.getName }}</a></li>
+
             {% endfor %}
          </ul>
 
@@ -24,26 +26,13 @@
               <li><a href="http://www.dailywritingtips.com">www.dailywritingtips.com</a></li>
           </ul>
           </div>
-          <div class="col-md-4">
-
-              <form action="/admin_start" method="post">
-              <div class="form-group">
-                  <label for="topic">What topic will this promptr be under</label>
-                  <input class="form-control" id="topic" name="topic" type ="text">
-                  <br>
-              </div>
-              <button id="topic" type="submit" class="btn-md">Add Topic</button>
-            </form>
-
-              <a href="/admin_start">Admin</a>
-              <h3>Popular Promptrs</h3>
-              <ul>
-              {% for promptr in promptrs %}
-                <li> <a href="/promptr/{id}">{{ promptr.getName}}</a></li>
-            {% endfor %}
-
-
-          </div>
+            <div class="col-md-4">
+                <h3>Popular Promptrs</h3>
+                <ul>
+                    {% for promptr in promptrs %}
+                        <li> <a href="/promptr/{id}">{{ promptr.getName}}</a></li>
+                    {% endfor %}
+            </div>
       </div>
 
   </body>
