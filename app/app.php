@@ -59,6 +59,7 @@
 
     $app->post("/promptrs", function() use ($app){
         $promptr_name = $_POST['promptr_name'];
+        $topic_id = $_POST['topic_id'];
         $new_promptr = new Promptr($promptr_name);
         $new_promptr->save();
         return $app['twig']->render('promptrs.html.twig', array (
@@ -83,6 +84,17 @@
         return $app['twig']->render("promptr.html.twig", array('promptr' => $promptr, 'questions' => $questions));
     });
 
+//delete question route
+    $app->delete("/promptr/{id}/delete_question/{qId}", function($id, $qId) use ($app){
+        $question_id = $qId;
+        $promptr = Promptr::find($id);
+        $question = Question::findById($question_id);
+        $question->delete();
+        $questions = $promptr->getQuestions();
+        return $app['twig']->render("promptr.html.twig", array('promptr' => $promptr, 'questions' => $questions));
+    });
+
+
     // first page of promptr run - displays first question in promptr
     // question array
     $app->get("/promptr/{id}/question", function($id) use ($app){
@@ -97,10 +109,10 @@
     // following pages of promptr run
     $app->post("/promptr/{id}/question/{quid}", function($id, $quid) use ($app){
         $end_flag = false;
-        ++$quid;
         $answer_field = $_POST['answer'];
         $new_answer = new Answer($answer_field, $quid);
         $new_answer->save();
+        ++$quid;
         $question = Question::findById($quid);
         $promptr = Promptr::find($id);
         if($question != null){
@@ -124,7 +136,14 @@
     });
 
 
+    $app->get("/promptr/{id}/display", function($id) use ($app){
 
+        $promptr = Promptr::find($id);
+        $questions = $promptr->getQuestions();
+
+        return $app['twig']->render('display.html.twig',array('promptr' => $promptr, 'questions' => $questions));
+
+    });
 
     return $app;
 ?>
