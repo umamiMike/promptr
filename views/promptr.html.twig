@@ -1,29 +1,36 @@
 <html>
     <head>
         <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>Promptr</title>
-        <link rel="stylesheet" href="../css/styles.css" media="screen" charset="utf-8">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
+        <link rel="stylesheet" type="text/css" href="/css/index.css" media="screen" charset="utf-8">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
     </head>
     <body>
-        <div class="container">
+        <div class="jumbotron">
+            <h1>Promptr - "{{ promptr.getName }}"</h1>
+        </div>
 
-        <h2>Promptr - "{{ promptr.getName }}"</h2>
+        <h3>Questions</h3>
 
+<div class="balls">
         {% embed "question_form.html.twig" %}
 
         {% endembed %}
-
+      </div>
         {% if questions is not empty %}
 
             {% for question in questions %}
-                <div class="row">
+
+                <!-- <div class="row"> -->
+                  <div class="col-md-6">
                     {{ question.getQuestion }}<br>
                     {{ question.getDescription }}
-                </div>
+
             {% endfor %}
         {% endif %}
+      </div>
         <a href="/promptr/{{ promptr.getId }}/question">Run your promptr</a>
 
 
