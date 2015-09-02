@@ -85,15 +85,15 @@
 
     // first page of promptr run - displays first question in promptr
     // question array
-    $app->get("/promptr/{id}/question/{quid}", function($id,$quid = 0) use ($app){
+    $app->get("/promptr/{id}/question", function($id) use ($app){
         $promptr = Promptr::find($id);
-        $first_question = $promptr->getQuestions()[$quid];
+        $first_question = $promptr->getQuestions()[0];
         return $app['twig']->render('question.html.twig', array('question' => $first_question));
 
     });
 
     // following pages of promptr run
-    $app->post("/promptr/{id}/question/{quid}", function($id,$quid) use ($app){
+    $app->post("/promptr/{id}/question/{quid}", function($id, $quid) use ($app){
         $end_flag = false;
         ++$quid;
         $answer_field = $_POST['answer'];
