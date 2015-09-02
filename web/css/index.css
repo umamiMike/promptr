@@ -1,0 +1,24 @@
+body {
+    background-color: #b0c4de;
+}
+
+body {
+    background-image: url("../css/dons.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+img{
+    width: 50%;
+}
+
+h1{
+    text-align: center;
+}
+
+h2{
+    text-align: center;
+}
+
+.jumbotron{
+  background-color: #b0c4de;
