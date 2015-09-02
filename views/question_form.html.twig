@@ -1,0 +1,34 @@
+<div class= "container">
+    <form  action="/promptr/{{ promptr.getId }}" method="post">
+        {% if questions is not empty %}
+            {% for question in questions %}
+                {{ question.getQuestion }}
+                {{ question.getDescription }}
+            {% endfor %}
+        {% endif %}
+        <div class="form-group">
+                    <label class="col-md-4 control-label" for="brand_name">Write a question</label>
+
+                    <input id="question" name="question" type="text" placeholder="Add a question" class="form-control input-md" required="">
+        </div>
+
+        <div class="form-group">
+            <h2>Question Details</h2>
+            <h3>Enter a description for your question - lead your brain down a path</h3>
+
+                <textarea placeholder="This is an awesome comment box" rows="40" name="description" id="description" cols="40" class="ui-autocomplete-input" autocomplete="off" role="textbox" aria-autocomplete="list" aria-haspopup="true"></textarea>
+
+
+        </div> <!-- end form group -->
+
+                    <!-- Button -->
+        <div class="form-group">
+            <label class="col-md-4 control-label" for="button"></label>
+            <button id="button" name="button" class="btn btn-primary">Button</button>
+        </div>
+
+
+    </form>
+
+
+</div>

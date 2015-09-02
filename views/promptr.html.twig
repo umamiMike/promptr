@@ -1,8 +1,17 @@
 <html>
     <head>
+        <meta charset="utf-8">
         <title>Promptr</title>
+        <link rel="stylesheet" href="../css/styles.css" media="screen" charset="utf-8">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
     </head>
     <body>
         <h2>Promptr id main page</h2>
+
+        {% embed "question_form.html.twig" %}
+
+        {% endembed %}
+<!-- embed a text box here to enter a description -->
     </body>
 </html>
