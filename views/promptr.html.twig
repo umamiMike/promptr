@@ -3,6 +3,8 @@
         <meta charset="utf-8">
         <title>Promptr</title>
         <link rel="stylesheet" href="../css/styles.css" media="screen" charset="utf-8">
+        <link rel="stylesheet" href="../../../css/styles.css" media="screen" charset="utf-8">
+
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
     </head>
@@ -17,12 +19,20 @@
 
         {% if questions is not empty %}
 
-            {% for question in questions %}
-                <div class="row">
-                    {{ question.getQuestion }}<br>
-                    {{ question.getDescription }}
-                </div>
-            {% endfor %}
+
+checkboxes not working...how to send multiple question values to delete page?
+              {% for question in questions %}
+          <form  action="/promptr/{{ promptr.getId }}/delete_question/{{ question.getId }}" method="post">
+                  <label name="question_id" id="question_id">
+                      <input id="question_id" name="_method" type="hidden" value="delete">{{ question.getQuestion }}
+                  </label>
+                  <button name="button" type="submit">delete</button>
+              </form>
+              {% endfor %}
+
+
+
+delete these
         {% endif %}
         <a href="/promptr/{{ promptr.getId }}/question">Run your promptr</a>
 

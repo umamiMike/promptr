@@ -83,6 +83,17 @@
         return $app['twig']->render("promptr.html.twig", array('promptr' => $promptr, 'questions' => $questions));
     });
 
+//delete question route
+    $app->delete("/promptr/{id}/delete_question/{qId}", function($id, $qId) use ($app){
+        $question_id = $qId;
+        $promptr = Promptr::find($id);
+        $question = Question::findById($question_id);
+        $question->delete();
+        $questions = $promptr->getQuestions();
+        return $app['twig']->render("promptr.html.twig", array('promptr' => $promptr, 'questions' => $questions));
+    });
+
+
     // first page of promptr run - displays first question in promptr
     // question array
     $app->get("/promptr/{id}/question", function($id) use ($app){
