@@ -7,11 +7,26 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
     </head>
     <body>
-        <h2>Promptr id main page</h2>
+        <div class="container">
+
+        <h2>Promptr - "{{ promptr.getName }}"</h2>
 
         {% embed "question_form.html.twig" %}
 
         {% endembed %}
+
+        {% if questions is not empty %}
+
+            {% for question in questions %}
+                <div class="row">
+                    {{ question.getQuestion }}<br>
+                    {{ question.getDescription }}
+                </div>
+            {% endfor %}
+        {% endif %}
+
+
 <!-- embed a text box here to enter a description -->
+        </div>
     </body>
 </html>

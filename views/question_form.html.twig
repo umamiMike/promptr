@@ -1,11 +1,6 @@
 <div class= "container">
     <form  action="/promptr/{{ promptr.getId }}" method="post">
-        {% if questions is not empty %}
-            {% for question in questions %}
-                {{ question.getQuestion }}
-                {{ question.getDescription }}
-            {% endfor %}
-        {% endif %}
+
         <div class="form-group">
                     <label class="col-md-4 control-label" for="brand_name">Write a question</label>
 

@@ -47,7 +47,8 @@
         $new_question_text = $_POST['question'];
         $new_description = $_POST['description'];
         $new_question = new Question($new_question_text, $new_description);
-        $promptr->addQuestion($new_question);
+        $new_question->save();
+        $promptr->addQuestion($new_question->getId());
         return $app['twig']->render('promptr.html.twig', array (
                                     'promptr' => $promptr,
                                     'questions' => $promptr->getQuestions()));
@@ -58,7 +59,8 @@
         $promptr_name = $_POST['promptr_name'];
         $new_promptr = new Promptr($promptr_name);
         $new_promptr->save();
-        return $app['twig']->render('promptrs.html.twig', array ('promptrs' => Promptr::getAll()));
+        return $app['twig']->render('promptrs.html.twig', array (
+                                    'promptrs' => Promptr::getAll()));
     });
 
     $app->get("/deleteAllPromptrs", function() use ($app){
