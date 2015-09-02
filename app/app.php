@@ -41,7 +41,7 @@
         return $app['twig']->render('promptr.html.twig', array ('promptr' => $promptr,'questions' => $promptr->getQuestions()));
 
     });
-
+    // will populate a promptr with questions/descriptions
     $app->post("/promptr/{id}", function($id) use ($app){
         $promptr = Promptr::find($id);
         $new_question_text = $_POST['question'];
@@ -54,6 +54,8 @@
                                     'questions' => $promptr->getQuestions()));
 
     });
+
+    // run through a promptr
 
     $app->post("/promptrs", function() use ($app){
         $promptr_name = $_POST['promptr_name'];
@@ -81,6 +83,42 @@
         return $app['twig']->render("promptr.html.twig", array('promptr' => $promptr, 'questions' => $questions));
     });
 
+    // first page of promptr run - displays first question in promptr
+    // question array
+    $app->get("/promptr/{id}/question/{quid}", function($id,$quid = 0) use ($app){
+        $promptr = Promptr::find($id);
+        $first_question = $promptr->getQuestions()[$quid];
+        return $app['twig']->render('question.html.twig', array('question' => $first_question));
+
+    });
+
+    // following pages of promptr run
+    $app->post("/promptr/{id}/question/{quid}", function($id,$quid) use ($app){
+        $end_flag = false;
+        ++$quid;
+        $answer_field = $_POST['answer'];
+        $new_answer = new Answer($answer_field, $quid);
+        $new_answer->save();
+        $question = Question::find($quid);
+        if($question != null){
+
+            $question->addAnswer($new_answer);
+            $promptr = Promptr::find($id);
+
+            $questions = $promptr->getQuestions();
+            $last_question = end($questions);
+
+
+            if ($question == $last_question)
+            {
+                $end_flag = true;
+            }
+        }
+
+        return $app['twig']->render('question.html.twig', array(
+                                    'question' => $questions,
+                                    'end' => $end_flag));
+    });
 
 
 
