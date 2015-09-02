@@ -7,12 +7,17 @@
     </head>
     <body>
         <div class="container">
-            {{ question.getQuestion }}<br>
-            {{ question.getDescription }}<br>
+            {% if question %}
+                {{ question.getQuestion }}<br>
+                {{ question.getDescription }}<br>
 
-        {% embed "answer_form.html.twig" %}
+                {% embed "answer_form.html.twig" %}
 
-        {% endembed %}
+                {% endembed %}
+            {% else %}
+                <h3>You have finished running through the "{{ promptr.getName }}" promptr!</h3>
+                <a href="/">Start Over</a>
+            {% endif %}
 
 
         </div>

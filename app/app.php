@@ -88,7 +88,9 @@
     $app->get("/promptr/{id}/question", function($id) use ($app){
         $promptr = Promptr::find($id);
         $first_question = $promptr->getQuestions()[0];
-        return $app['twig']->render('question.html.twig', array('question' => $first_question));
+        return $app['twig']->render('question.html.twig', array(
+                                    'question' => $first_question,
+                                    'promptr' => $promptr));
 
     });
 
@@ -99,11 +101,11 @@
         $answer_field = $_POST['answer'];
         $new_answer = new Answer($answer_field, $quid);
         $new_answer->save();
-        $question = Question::find($quid);
+        $question = Question::findById($quid);
+        $promptr = Promptr::find($id);
         if($question != null){
 
-            $question->addAnswer($new_answer);
-            $promptr = Promptr::find($id);
+            $question->addAnswer($new_answer->getId());
 
             $questions = $promptr->getQuestions();
             $last_question = end($questions);
@@ -116,8 +118,9 @@
         }
 
         return $app['twig']->render('question.html.twig', array(
-                                    'question' => $questions,
-                                    'end' => $end_flag));
+                                    'question' => $question,
+                                    'end' => $end_flag,
+                                    'promptr' => $promptr));
     });
 
 
