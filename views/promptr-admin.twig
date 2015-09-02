@@ -21,10 +21,6 @@
           <br>
           <br>
 
-          {% embed "create_topic_form.html.twig" %}
-
-          {% endembed %}
-
           {% for promptr in promptrs %}
               <a href="/promptr/{{ promptr.getId }}">{{ promptr.getName }}</a> <br>
           {% endfor %}

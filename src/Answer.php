@@ -82,7 +82,6 @@ class Answer {
             $quest_id = $answer['question_id'];
             $id = $answer['id'];
             $new_answer = new Answer($field, $quest_id, $id);
-            //var_dump($new_answer);
             array_push($answers, $new_answer);
         }
         return $answers;
