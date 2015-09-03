@@ -88,8 +88,28 @@
                                     'topics' => $topics, 
                                     'promptrs' => $promptrs));
     });
+<<<<<<< HEAD
 // PROMPTR.HTML.TWIG
 // START PAGE for creating a new promptr
+=======
+
+
+    $app->get("/topic/{id}", function($id) use ($app){
+        $topic = Topic::find($id);
+        $promptrs = $topic->getPromptrs();
+        return $app['twig']->render("topic.html.twig", array('topic' => $topic, 'promptrs' => $promptrs));
+    });
+
+        $app->post("/create-topic", function() use ($app){
+        $topic_name = $_POST['topic_name'];
+        $topic = new Topic($topic_name);
+        $topic->save();
+        $promptrs = $topic->getPromptrs();
+        return $app['twig']->render("topic.html.twig", array('topic' => $topic, 'promptrs' => $promptrs));
+    });
+
+
+>>>>>>> master
     $app->get("/promptr/{id}", function($id) use ($app){
         $promptr = Promptr::find($id);
         return $app['twig']->render('promptr.html.twig', array (
@@ -115,7 +135,11 @@
     $app->post("/promptrs", function() use ($app){
         $promptr_name = $_POST['promptr_name'];
         $topic_id = $_POST['topic_id'];
+<<<<<<< HEAD
         $new_promptr = new Promptr($promptr_name, $topic_id);
+=======
+        $new_promptr = new Promptr($promptr_name,$topic_id);
+>>>>>>> master
         $new_promptr->save();
         return $app['twig']->render('promptrs.html.twig', array (
                                     'promptrs' => Promptr::getAll(),
@@ -129,6 +153,7 @@
         return $app['twig']->render('promptrs.html.twig', array (
                                     'promptrs' => Promptr::getAll()));
     });
+<<<<<<< HEAD
 // TOPIC.HTML.TWIG
 // TOPIC MAIN PAGE -- display all promptrs within a specific topic
     $app->get("/topic/{id}", function($id) use ($app){
@@ -140,6 +165,18 @@
     });
 // PROMPTR.HTML.TWIG
 //delete question from NEW PROMPTR route -- then displays promptr page
+=======
+
+
+
+    $app->get("promptr/{id}", function($id) use ($app){
+        $promptr = Promptr::find($id);
+        $questions = $promptr->getQuestions();
+        return $app['twig']->render("promptr.html.twig", array('promptr' => $promptr, 'questions' => $questions));
+    });
+
+//delete question route
+>>>>>>> master
     $app->delete("/promptr/{id}/delete_question/{qId}", function($id, $qId) use ($app){
         $question_id = $qId;
         $promptr = Promptr::find($id);
@@ -186,8 +223,13 @@
                                     'end' => $end_flag,
                                     'promptr' => $promptr));
     });
+<<<<<<< HEAD
 // DISPLAY.HTML.TWIG
 // DISPLAY FINISHED answers to promptr run
+=======
+
+//will show the concatted together display of the list
+>>>>>>> master
     $app->get("/promptr/{id}/display", function($id) use ($app){
         $promptr = Promptr::find($id);
         $questions = $promptr->getQuestions();

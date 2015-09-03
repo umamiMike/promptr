@@ -8,7 +8,8 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
     </head>
     <body>
-        <div class="container" style="height:100%">
+        <div class="container">
+            {% if topic.getPromptrs is not empty %}
             <div class="col-md-8">
                 <h2>{{ topic.getName }}: </h2>
                 <ul>
@@ -17,6 +18,27 @@
                     {% endfor %}
                 </ul>
             </div>
+
+            {% else %}
+                <div class= "formContainer">
+                    <form  action="/promptrs" method="post">
+                        <div class="form-group">
+                                    <label class="col-md-4 control-label" for="brand_name">Create a Promptr</label>
+                                    <input id="promptr_name" name="promptr_name" type="text" placeholder="Add a Promptr name" class="form-control input-md" required="">
+                                    </div>
+                                    <input type="hidden" name="topic_id" value="{{ topic.getId}}">
+
+                                    <!-- Button -->
+                                    <div class="form-group">
+                                      <label class="col-md-4 control-label" for="button"></label>
+                                        <button id="button" name="button" class="btn btn-primary">Button</button>
+                                      </div>
+                    </form>
+
+
+                </div>
+
+            {%  endif %}
 <div>
     go to premade id and run
 </div>
