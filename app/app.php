@@ -19,15 +19,38 @@
 
     use Symfony\Component\HttpFoundation\Request;
     Request::enableHttpMethodParameterOverride();
-// PROMPTR.ADMIM.TWIG
+    
+/////////////////////////////////////////////////////////////////
+////////////////// BEGIN ADMIN PAGES ////////////////////////////
+/////////////////////////////////////////////////////////////////
+// PROMPTR-ADMIM.TWIG
 // this route is manually entered and used only to populate the database
     $app->get("/admin", function() use ($app){
         $topics = Topic::getAll();
         $promptrs = Promptr::getAll();
-        return $app['twig']->render('promptr-admin.twig', array(
+        return $app['twig']->render('promptr-admin.html.twig', array(
                                     'topics' => $topics, 
                                     'promptrs' => $promptrs));
     });
+// //Admin page after all promptr delete -- refreshes admin page with topics only
+    $app->delete("/admin", function() use ($app){
+        Promptr::deleteAll();        
+        return $app['twig']->render("promptr-admin.html.twig", array(
+                                    'topics' => Topic::getAll()));
+    });
+//  UNPOPULATED HOME PAGE -- SHOULD ONLY BE REACHED AFTER DELETE ALL PEFORMED
+// ON ADMIN PAGE    
+    $app->delete("/", function() use ($app){
+        Promptr::deleteAll();
+        Topic::deleteAll();
+        Question::deleteAll();
+        Answer::deleteAll();
+        return $app['twig']->render('index.html.twig');
+    });
+/////////////////////////////////////////////////////////////////
+/////////////////// END ADMIN PAGES /////////////////////////////
+/////////////////////////////////////////////////////////////////
+
 // INDEX.HTML.TWIG
 // home page displays list of topics, popular promptrs, and option to create a new promptr
     $app->get("/", function() use ($app){
@@ -64,10 +87,12 @@
     $app->post("/promptrs", function() use ($app){
         $promptr_name = $_POST['promptr_name'];
         $topic_id = $_POST['topic_id'];
-        $new_promptr = new Promptr($promptr_name);
+        $new_promptr = new Promptr($promptr_name, $topic_id);
         $new_promptr->save();
         return $app['twig']->render('promptrs.html.twig', array (
-                                    'promptrs' => Promptr::getAll()));
+                                    'promptrs' => Promptr::getAll(),
+                                    'topic' => $topic_id,
+                                    'topic_picked' => true));// flag for included template
     });
 // PROMPTRS.HTML.TWIG
 // DELETE ALL PROMPTRS -- ADMIN ONLY (no duh)
