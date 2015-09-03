@@ -1,0 +1,43 @@
+<html>
+  <head>
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <title>Promptr</title>
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
+      <link rel="stylesheet" type="text/css" href="/css/index.css" media="screen" charset="utf-8">
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+  </head>
+  <body>
+      <div class="container">
+        <div class="jumbotron">
+            <h1>Welcome to Promptr!</h1>
+            <h2>An app for brainstorming</h2>
+        </div>
+        <div class="row">
+            <div class="col-md-4">
+                <h3>Topics</h3>
+                <ul>
+                  {% for topic in topics %}
+                      <li><a href="/topic/{{ topic.getId }}">{{ topic.getName }}</a></li>
+
+                  {% endfor %}
+               </ul>
+            </div>
+            <div class="col-md-4">
+                <h3>Helpful Links</h4>
+                <ul>
+                    <li><a href="http://www.writersdigest.com/online-editor/novel-writing-10-questions-you-need-to-ask-your-characters">www.writersdigest.com</a></li>
+                    <li><a href="http://www.dailywritingtips.com">www.dailywritingtips.com</a></li>
+                </ul>
+            </div>
+            <div class="col-md-4">
+                <h3>Popular Promptrs</h3>
+                <ul>
+                    {% for promptr in promptrs %}
+                        <li> <a href="/promptr/{{ promptr.getId}}"> {{ promptr.getName}}</a></li>
+                    {% endfor %}
+            </div>
+      </div>
+
+  </body>
+</html>
