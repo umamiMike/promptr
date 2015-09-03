@@ -98,9 +98,8 @@
         static function getTrendingPromptrs()
         {
             $top = [];
-            $count = 0;
             $query = $GLOBALS['DB']->query("SELECT * FROM promptrs ORDER BY trending DESC LIMIT 5;");
-            while(!empty($query) && $count < 5){
+
                 foreach($query as $promptr){
                     $name = $promptr['name'];
                     $topic_id = $promptr['topic_id'];
@@ -109,9 +108,8 @@
                     $id = $promptr['id'];
                     $new_P = new Promptr($name, $topic_id, $trending, $example, $id);
                     array_push($top, $new_P);
-                    ++$count;
                 }
-            }
+
             return $top;
         }
 

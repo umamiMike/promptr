@@ -23,10 +23,16 @@
                 #}
                 {% if promptr != null %}
                     {% for question in questions %}
-                        <h3>    {{ question.getQuestion }} </h3>
-                        {% for answer in question.getAnswers  %}
-                            <h5>    {{ answer.getAnswer }} </h5>
-                        {% endfor %}
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h3>    {{ question.getQuestion }} </h3>
+                            </div>
+                            {% for answer in question.getAnswers  %}
+                                    <div class="panel-body">
+                                        <h5>    {{ answer.getAnswer }} </h5>
+                                    </div>
+                            {% endfor %}
+                        </div>
                     {% endfor %}
 
                     <form action="/promptr/{{ promptr.getId }}">

@@ -88,7 +88,7 @@
         // foreach($promptrs as $promptr){
         //     if($promptr->getTrending() > )
         // }
-        $pop_promptrs = Promptr::getTrending();
+        $pop_promptrs = Promptr::getTrendingPromptrs();
         return $app['twig']->render('index.html.twig', array(
                                     'topics' => $topics,
                                     'promptrs' => $promptrs));
@@ -209,6 +209,9 @@
         }
         foreach($questions as $question){
             $question->saveTempQuestion();
+        }
+        if ($questions == []){
+            return $app['twig']->render("promptr.html.twig", array('promptr' => $promptr, 'questions' => $questions, 'topic' => Topic::find($promptr->getTopicId())));
         }
         $temp_questions = Question::getTempQuestions();
         $first_question = $temp_questions[0];
