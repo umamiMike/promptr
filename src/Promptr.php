@@ -66,8 +66,10 @@
 
         function save()
         {
+            $temp_name = str_replace(["'"], "''", $this->getName());
+
             $GLOBALS['DB']->exec("INSERT INTO promptrs (name,topic_id,trending,example)
-                                    VALUES ('{$this->getName()}',
+                                    VALUES ('{$temp_name}',
                                     {$this->getTopicId()},
                                     {$this->getTrending()},
                                     {$this->getExample()});");

@@ -44,7 +44,9 @@ class Question {
 
     function save()
     {
-        $GLOBALS['DB']->exec("INSERT INTO questions (question, description) VALUES ('{$this->getQuestion()}', '{$this->getDescription()}');");
+        $temp_quest = str_replace(["'"], "''", $this->getQuestion());
+        $temp_desc = str_replace(["'"], "''", $this->getDescription());
+        $GLOBALS['DB']->exec("INSERT INTO questions (question, description) VALUES ('{$temp_quest}', '{$temp_desc}');");
         $this->id = $GLOBALS['DB']->lastInsertId();
     }
 
