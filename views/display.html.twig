@@ -16,8 +16,11 @@
                             <br>
                             {% endfor %}
                         {% endfor %}
+
+                        <form action="/promptr/{{ promptr.getId }}">
+                            <button type="submit" class="btn btn-mini btn-info">Home</button>
+                        </form>
                     {% endif %}
-            </div>
       </div>
 
   </body>

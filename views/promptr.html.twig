@@ -4,35 +4,40 @@
         <title>Promptr</title>
         <link rel="stylesheet" href="/css/styles.css" media="screen" charset="utf-8">
         <link rel="stylesheet" href="/css/forms.css" media="screen" charset="utf-8">
-
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
     </head>
     <body>
         <div class="container">
 
-        <h2>Promptr - "{{ promptr.getName }}"</h2>
-        <h3>   <a href="/promptr/{{ promptr.getId }}/question">Run your promptr</a> </h3>
+            <h2>Promptr - "{{ promptr.getName }}"</h2>
+            <h3>   <a href="/promptr/{{ promptr.getId }}/question"><i class="fa fa-play"></i></a> Run your promptr</h3>
 
-        {% embed "forms/question_form.html.twig" %}
+            {% embed "forms/question_form.html.twig" %}
 
-        {% endembed %}
+            {% endembed %}
 
-        {% if questions is not empty %}
+            {% if questions is not empty %}
 
-              {% for question in questions %}
-              <form  class="deletelist" action="/promptr/{{ promptr.getId }}/delete_question/{{ question.getId }}" method="post">
-                  <label name="question_id" id="question_id">
-                      <input id="question_id" name="_method" type="hidden" value="delete">{{ question.getQuestion }}
-                  </label>
-                  <button name="button" type="submit">x</button>
-              </form>
-              {% endfor %}
+                  {% for question in questions %}
+                  <form  class="deletelist" action="/promptr/{{ promptr.getId }}/delete_question/{{ question.getId }}" method="post">
+                      <label name="question_id" id="question_id">
+                          <input id="question_id" name="_method" type="hidden" value="delete">{{ question.getQuestion }}
+                      </label>
+                      <button name="button" type="submit"><i class="fa fa-trash-o"></i></button>
+                  </form>
+                  {% endfor %}
 
-        {% endif %}
-
-
-
+            {% endif %}
+            <div class="btn-group inline pull-left">
+                <form action="/topic/{{ promptr.getTopicId }}">
+                    <button type="submit" class="btn btn-sm btn-default">Back to {{ topic.getName }}</button>
+                </form>
+            </div>
+            <form action="/">
+                <button type="submit" class="btn btn-sm btn-default">Home</button>
+            </form>
 <!-- embed a text box here to enter a description -->
         </div>
     </body>
