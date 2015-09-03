@@ -161,16 +161,17 @@
                                     'question' => $first_question,
                                     'promptr' => $promptr));
     });
-// QUESTION.HTML.TWIG
+// QUESTION.HTML.TWIG -- needs fixed -- if a question has been deleted, id # is skipped and
+// end_flag = true. Need to somehow loop through just the questions in promptr->getQuestions
 // the following pages of promptr run -- adding more answers
     $app->post("/promptr/{id}/question/{quid}", function($id, $quid) use ($app){
+        $promptr = Promptr::find($id);
         $end_flag = false;
         $answer_field = $_POST['answer'];
         $new_answer = new Answer($answer_field, $quid);
         $new_answer->save();
         ++$quid;
         $question = Question::findById($quid);
-        $promptr = Promptr::find($id);
         if($question != null){
             $question->addAnswer($new_answer->getId());
             $questions = $promptr->getQuestions();
