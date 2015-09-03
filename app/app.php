@@ -195,8 +195,11 @@
     // question array -- takes answer from user
     $app->get("/promptr/{id}/question", function($id) use ($app){
         $promptr = Promptr::find($id);
-        $shuffle = false;
+        $shuffle = $_GET['shuffle'];
         $questions = $promptr->getQuestions();
+        if($shuffle == true){
+            shuffle($questions);
+        }
         foreach($questions as $question){
             $question->saveTempQuestion();
         }
