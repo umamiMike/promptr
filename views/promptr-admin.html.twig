@@ -10,6 +10,11 @@
         <div class="container">
             {{ include ('create_promptr_form.html.twig', { topic_list: topics }) }}
             <br>
+            {# DISPLAY LIST OF UNPOPULATED PROMPTRS THAT NEED QUESTIONS ADDED #}
+            {% for promptr in promptrs %}
+                <a href="/promptr/{{ promptr.getId }}">{{ promptr.getName }}</a><br>
+            {% endfor %}
+
             <div class="row">
                 <form action="/admin" method="post">
                     <label for="_method">Delete all promptrs and return to admin page</label>
@@ -17,8 +22,8 @@
                     <button type="submit" class="btn-primary">DELETE</button>
                 </form>
                 
-                <form action="/" method="delete">
-                    <label for="delete_all">Delete EVERYTHING and go to Promptr Home</label>
+                <form action="/" method="post">
+                    <label for="_method">Delete EVERYTHING and go to Promptr Home</label>
                     <input type="hidden" name="_method" value="delete">
                     <button type="submit" class="btn-danger">DELETE</button>
                 </form>
