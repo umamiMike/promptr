@@ -3,41 +3,27 @@
         <meta charset="utf-8">
         <title>Promptr</title>
         <link rel="stylesheet" href="/css/styles.css" media="screen" charset="utf-8">
-
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
     </head>
     <body>
         <div class="container">
+
+            <h2>Topic: {{ topic.getName }}</h2>
             {% if topic.getPromptrs is not empty %}
             <div class="col-md-8">
-                <h2>{{ topic.getName }}: </h2>
                 <ul>
                     {% for promptr in promptrs %}
-                        <li><a href="/promptr/{{ promptr.getId }}">{{ promptr.getName }}</a></li>
+
+                        <li><a href="/promptr/{{ promptr.getId }}/question">{{ promptr.getName}}</a></li><a type="button" href="/promptr/{{ promptr.getId }}">Edit this Promptr</a>
+
                     {% endfor %}
                 </ul>
             </div>
 
             {% else %}
-                <div class= "formContainer">
-                    <form  action="/promptrs" method="post">
-                        <div class="form-group">
-                                    <label class="col-md-4 control-label" for="brand_name">Create a Promptr</label>
-                                    <input id="promptr_name" name="promptr_name" type="text" placeholder="Add a Promptr name" class="form-control input-md" required="">
-                                    </div>
-                                    <input type="hidden" name="topic_id" value="{{ topic.getId}}">
-
-                                    <!-- Button -->
-                                    <div class="form-group">
-                                      <label class="col-md-4 control-label" for="button"></label>
-                                        <button id="button" name="button" class="btn btn-primary">Button</button>
-                                      </div>
-                    </form>
-
-
-                </div>
-
+                <h3>--No Promptrs!</h3><br>
+                {{ include ('forms/create_promptr_form.html.twig', { topic_list: 'null', curr_topic : topic}) }}
             {%  endif %}
 <div>
     go to premade id and run

@@ -91,8 +91,6 @@
 // PROMPTR.HTML.TWIG
 // START PAGE for creating a new promptr
 
-
-
     $app->get("/topic/{id}", function($id) use ($app){
         $topic = Topic::find($id);
         $promptrs = $topic->getPromptrs();
@@ -137,10 +135,7 @@
     $app->post("/promptrs", function() use ($app){
         $promptr_name = $_POST['promptr_name'];
         $topic_id = $_POST['topic_id'];
-
-
         $new_promptr = new Promptr($promptr_name,$topic_id);
-
         $new_promptr->save();
         return $app['twig']->render('promptrs.html.twig', array (
                                     'promptrs' => Promptr::getAll(),
@@ -160,9 +155,11 @@
     $app->get("/topic/{id}", function($id) use ($app){
         $topic = Topic::find($id);
         $promptrs = $topic->getPromptrs();
+        $allT = Topic::getAll();
         return $app['twig']->render("topic.html.twig", array(
                                     'topic' => $topic,
-                                    'promptrs' => $promptrs));
+                                    'promptrs' => $promptrs,
+                                    'all_topics' => $allT));
     });
 // PROMPTR.HTML.TWIG
 //delete question from NEW PROMPTR route -- then displays promptr page
@@ -188,6 +185,7 @@
         return $app['twig']->render("promptr.html.twig", array(
                                     'promptr' => $promptr,
                                     'questions' => $questions, 'topic' => $topic));
+
     });
 // QUESTION.HTML.TWIG
 // run through a promptr
@@ -236,13 +234,12 @@
                                     'end' => $end_flag,
                                     'promptr' => $promptr));
     });
-
+    
 // DISPLAY.HTML.TWIG
 // DISPLAY FINISHED answers to promptr run
 
 
 //will show the concatted together display of the list
-
     $app->get("/promptr/{id}/display", function($id) use ($app){
         $promptr = Promptr::find($id);
         $questions = $promptr->getQuestions();

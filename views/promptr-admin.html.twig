@@ -8,7 +8,7 @@
     </head>
     <body>
         <div class="container">
-            {{ include ('create_promptr_form.html.twig', { topic_list: topics }) }}
+            {{ include ('forms/create_promptr_form.html.twig', { topic_list: topics }) }}
             <br>
             {# DISPLAY LIST OF UNPOPULATED PROMPTRS THAT NEED QUESTIONS ADDED (by topic #}
             {% if promptrs is not empty %}
@@ -35,16 +35,15 @@
                     <input type="hidden" name="_method" value="delete">
                     <button type="submit" class="btn-primary">DELETE</button>
                 </form>
-                
+
                 <form action="/" method="post">
                     <label for="_method">Delete EVERYTHING and go to Promptr Home</label>
                     <input type="hidden" name="_method" value="delete">
                     <button type="submit" class="btn-danger">DELETE</button>
                 </form>
-                <a href="/delete_everything">DELETE EVERYTHING</a>
                 <br>
                 <a href="/">Promtr Home Page</a>
             </div>
-        </div>       
+        </div>
     </body>
 </html>
