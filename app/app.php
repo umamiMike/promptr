@@ -19,7 +19,7 @@
 
     use Symfony\Component\HttpFoundation\Request;
     Request::enableHttpMethodParameterOverride();
-    
+
 /////////////////////////////////////////////////////////////////
 ////////////////// BEGIN ADMIN PAGES ////////////////////////////
 /////////////////////////////////////////////////////////////////
@@ -35,9 +35,9 @@
                 array_push($empty_promptrs, $promptr);
             }
         }
-        
+
         return $app['twig']->render('promptr-admin.html.twig', array(
-                                    'topics' => $topics, 
+                                    'topics' => $topics,
                                     'promptrs' => $empty_promptrs));
     });
 // renders after adding a blank promptr
@@ -54,20 +54,20 @@
             if(empty($promptr->getQuestions())){
                 array_push($empty_promptrs, $promptr);
             }
-        }        
+        }
         return $app['twig']->render('promptr-admin.html.twig', array(
-                                    'topics' => $topics, 
+                                    'topics' => $topics,
                                     'promptrs' => $empty_promptrs));
     });
 // //Admin page after all promptr delete -- refreshes admin page with topics only
     $app->delete("/admin", function() use ($app){
-        Promptr::deleteAll();        
+        Promptr::deleteAll();
         return $app['twig']->render("promptr-admin.html.twig", array(
                                     'topics' => Topic::getAll(),
                                     'promptrs' => Promptr::getAll()));
     });
 //  UNPOPULATED HOME PAGE -- SHOULD ONLY BE REACHED AFTER DELETE ALL PEFORMED
-// ON ADMIN PAGE    
+// ON ADMIN PAGE
     $app->delete("/", function() use ($app){
         Promptr::deleteAll();
         Topic::deleteAll();
@@ -85,13 +85,11 @@
         $topics = Topic::getAll();
         $promptrs = Promptr::getAll();
         return $app['twig']->render('index.html.twig', array(
-                                    'topics' => $topics, 
+                                    'topics' => $topics,
                                     'promptrs' => $promptrs));
     });
-<<<<<<< HEAD
 // PROMPTR.HTML.TWIG
 // START PAGE for creating a new promptr
-=======
 
 
     $app->get("/topic/{id}", function($id) use ($app){
@@ -109,7 +107,6 @@
     });
 
 
->>>>>>> master
     $app->get("/promptr/{id}", function($id) use ($app){
         $promptr = Promptr::find($id);
         return $app['twig']->render('promptr.html.twig', array (
@@ -117,7 +114,7 @@
                                     'questions' => $promptr->getQuestions()));
 
     });
-// PROMPTR.HTML.TWIG 
+// PROMPTR.HTML.TWIG
 // CONTINUE CREATING NEW PROMPTR ROUTE
     $app->post("/promptr/{id}", function($id) use ($app){
         $promptr = Promptr::find($id);
@@ -135,11 +132,7 @@
     $app->post("/promptrs", function() use ($app){
         $promptr_name = $_POST['promptr_name'];
         $topic_id = $_POST['topic_id'];
-<<<<<<< HEAD
-        $new_promptr = new Promptr($promptr_name, $topic_id);
-=======
         $new_promptr = new Promptr($promptr_name,$topic_id);
->>>>>>> master
         $new_promptr->save();
         return $app['twig']->render('promptrs.html.twig', array (
                                     'promptrs' => Promptr::getAll(),
@@ -153,19 +146,17 @@
         return $app['twig']->render('promptrs.html.twig', array (
                                     'promptrs' => Promptr::getAll()));
     });
-<<<<<<< HEAD
 // TOPIC.HTML.TWIG
 // TOPIC MAIN PAGE -- display all promptrs within a specific topic
     $app->get("/topic/{id}", function($id) use ($app){
         $topic = Topic::find($id);
         $promptrs = $topic->getPromptrs();
         return $app['twig']->render("topic.html.twig", array(
-                                    'topic' => $topic, 
+                                    'topic' => $topic,
                                     'promptrs' => $promptrs));
     });
 // PROMPTR.HTML.TWIG
 //delete question from NEW PROMPTR route -- then displays promptr page
-=======
 
 
 
@@ -176,7 +167,6 @@
     });
 
 //delete question route
->>>>>>> master
     $app->delete("/promptr/{id}/delete_question/{qId}", function($id, $qId) use ($app){
         $question_id = $qId;
         $promptr = Promptr::find($id);
@@ -184,7 +174,7 @@
         $question->delete();
         $questions = $promptr->getQuestions();
         return $app['twig']->render("promptr.html.twig", array(
-                                    'promptr' => $promptr, 
+                                    'promptr' => $promptr,
                                     'questions' => $questions));
     });
 // QUESTION.HTML.TWIG
@@ -223,18 +213,15 @@
                                     'end' => $end_flag,
                                     'promptr' => $promptr));
     });
-<<<<<<< HEAD
 // DISPLAY.HTML.TWIG
 // DISPLAY FINISHED answers to promptr run
-=======
 
 //will show the concatted together display of the list
->>>>>>> master
     $app->get("/promptr/{id}/display", function($id) use ($app){
         $promptr = Promptr::find($id);
         $questions = $promptr->getQuestions();
         return $app['twig']->render('display.html.twig',array(
-                                    'promptr' => $promptr, 
+                                    'promptr' => $promptr,
                                     'questions' => $questions));
     });
 
