@@ -6,43 +6,68 @@
         <link rel="stylesheet" href="/css/forms.css" media="screen" charset="utf-8">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-material-design/0.3.0/css/material-fullpalette.css">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
     </head>
     <body>
         <div class="container">
 
             <h2>Promptr - "{{ promptr.getName }}"</h2>
-            <h3>
-                <div class="btn-group inline pull-left">
-                <form action="/promptr/{{ promptr.getId }}/question">
-                    <input type="hidden" name="shuffle" value="false">
-                    <button type="submit" class="btn btn-info"><i class="fa fa-play"></i></button>
-                </form>
+            <div class="panel panel-info">
+                <div class="panel-heading">
+                    <h3>Run your promptr</h3>
                 </div>
-                <div class="btn-group inline pull-left">
+                <div class="panel-body">
+                    <div class="btn-group inline pull-left">
                     <form action="/promptr/{{ promptr.getId }}/question">
-                        <input type="hidden" name="shuffle" value="true">
-                        <button type="submit" class="btn btn-info"><i class="fa fa-random"></i></button>
+                        <input type="hidden" name="shuffle" value="false">
+                        <button type="submit" class="btn btn-info"><i class="fa fa-play"></i></button>
                     </form>
+                    </div>
+                    <div class="btn-group inline pull-left">
+                        <form action="/promptr/{{ promptr.getId }}/question">
+                            <input type="hidden" name="shuffle" value="true">
+                            <button type="submit" class="btn btn-info"><i class="fa fa-random"></i></button>
+                        </form>
+                    </div>
                 </div>
-                    Run your promptr
-            </h3>
+            </div>
 
             {% embed "forms/question_form.html.twig" %}
 
             {% endembed %}
 
             {% if questions is not empty %}
-
-                  {% for question in questions %}
-                  <form  class="deletelist" action="/promptr/{{ promptr.getId }}/delete_question/{{ question.getId }}" method="post">
-                      <label name="question_id" id="question_id">
-                          <input id="question_id" name="_method" type="hidden" value="delete">{{ question.getQuestion }}
-                      </label>
-                      <button name="button" type="submit"><i class="fa fa-trash-o"></i></button>
-                  </form>
-                  {% endfor %}
-
+            <div class="panel panel-success">
+                <div class="panel-heading">
+                    <h3>Here are your existing questions:</h3>
+                </div>
+                <div class="panel-body">
+                    <table class="table table-striped table-hover">
+                        <tbody>
+                            <tr>
+                              {% for question in questions %}
+                              <td>{{ question.getQuestion }}</td>
+                              {#
+                              <td>
+                                  <form action="/promptr/{{ promptr.getId }}/delete_question/{{ question.getId }}" method="post">
+                                      <input id="question_id" name="_method" type="hidden" value="patch">
+                                      <button type="submit" class="btn btn-flat btn-warning"><i class="fa fa-pencil-square-o"></i></button>
+                                  </form>
+                              </td>
+                              #}
+                              <td>
+                              <form class="deletelist" action="/promptr/{{ promptr.getId }}/delete_question/{{ question.getId }}" method="post">
+                                  <input id="question_id" name="_method" type="hidden" value="delete">
+                                  <button name="button" type="submit" class="btn btn-flat btn-danger"><i class="fa fa-trash-o"></i></button>
+                              </form>
+                              <td>
+                            </tr>
+                          {% endfor %}
+                        </tbody>
+                  </table>
+                </div>
+            </div>
             {% endif %}
             <div class="btn-group inline pull-left">
                 <form action="/topic/{{ promptr.getTopicId }}">
