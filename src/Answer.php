@@ -44,7 +44,6 @@ class Answer {
 
     function save()
     {
-        //$name = str_replace(["'"], "''", $raw_name);
         $temp_ans = str_replace(["'"], "''", $this->getAnswer());
         $GLOBALS['DB']->exec("INSERT INTO answers (answer, question_id) VALUES ('{$temp_ans}', {$this->getQuestionId()});");
         $this->id = $GLOBALS['DB']->lastInsertId();

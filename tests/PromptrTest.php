@@ -205,6 +205,47 @@
 
             $this->assertEquals([$end_question,$end_question2], $result);
         }
+        // this test fails...returns top five trending promptrs, but the ids don't match up.
+        function test_getTrendingPromptrs()
+        {
+            $name = "mikes 5 top interview questions";
+            $topic_id = 5;
+            $trending_index = 3;
+            $test_promptr = new Promptr($name, $topic_id, $trending_index);
+            $test_promptr->save();
+
+            $name2 = "mikes 50 top interview questions";
+            $trending_index2 = 4;
+            $test_promptr2 = new Promptr($name2, $topic_id, $trending_index2);
+            $test_promptr2->save();
+
+            $name3 = "mikes 500 top interview questions";
+            $trending_index3 = 5;
+            $test_promptr3 = new Promptr($name3, $topic_id, $trending_index3);
+            $test_promptr3->save();
+
+            $name4 = "mikes 5000 top interview questions";
+            $trending_index4 = 6;
+            $test_promptr4 = new Promptr($name4, $topic_id, $trending_index4);
+            $test_promptr4->save();
+
+            $name5 = "mikes 50000 top interview questions";
+            $trending_index5 = 7;
+            $test_promptr5 = new Promptr($name5, $topic_id, $trending_index5);
+            $test_promptr5->save();
+
+            $name6 = "mikes 500000 top interview questions";
+            $trending_index6 = 8;
+            $test_promptr6 = new Promptr($name6, $topic_id, $trending_index6);
+            $test_promptr6->save();
+
+            //Act
+            $result = Promptr::getTrendingPromptrs();
+            var_dump($result);
+
+            //Assert
+            $this->assertEquals([$test_promptr6, $test_promptr5, $test_promptr4, $test_promptr3, $test_promptr2], $result);
+        }
 
     }
 ?>

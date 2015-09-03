@@ -9,13 +9,13 @@
         private $example;//not using yet but just you wait!!!
         private $id;
 
-        function __construct($name,$topic_id=0,$trending = 0,$example = 0, $id = null)
+        function __construct($name, $topic_id= 0, $trending = 0, $example = 0, $id = null)
 
         {
             $this->name = $name;
-            $this->topic_id  = $topic_id;
-            $this->trending = $trending;
-            $this->example = $example;
+            $this->topic_id  = (int) $topic_id;
+            $this->trending = (int) $trending;
+            $this->example = (int) $example;
             $this->id = $id;
         }
 
@@ -88,6 +88,36 @@
             $GLOBALS['DB']->exec("UPDATE promptrs SET name = '{$new_name}' WHERE id = {$this->getId()};");
             $this->setName($new_name);
         }
+
+        function updateTrending($new_index)
+        {
+            $GLOBALS['DB']->exec("UPDATE promptrs SET trending = '{$new_index}' WHERE id = {$this->getId()};");
+            $this->setTrending($new_index);
+        }
+
+        static function getTrendingPromptrs()
+        {
+            $top = [];
+            $count = 0;
+            $query = $GLOBALS['DB']->query("SELECT * FROM promptrs ORDER BY trending DESC LIMIT 5;");
+            while(!empty($query) && $count < 5){
+                foreach($query as $promptr){
+                    $name = $promptr['name'];
+                    $topic_id = $promptr['topic_id'];
+                    $trending = $promptr['trending'];
+                    $example = $promptr['example'];
+                    $id = $promptr['id'];
+                    $new_P = new Promptr($name, $topic_id, $trending, $example, $id);
+                    //$new_P->save();
+                    array_push($top, $new_P);
+                    //$top_five = array_reverse($top);
+                    ++$count;
+                }
+            }
+            //return $top_five;
+            return $top;
+        }
+
 
         static function getAll()
         {
