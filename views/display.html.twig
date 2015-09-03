@@ -12,8 +12,7 @@
                         {% for question in questions %}
                             {% for answer in question.getAnswers  %}
                         <h3>    {{ question.getQuestion }} </h3>
-                        <p>    {{ answer.getAnswer }} </p>
-                            <br>
+                        <h5>    {{ answer.getAnswer }} </h5>
                             {% endfor %}
                         {% endfor %}
 

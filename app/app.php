@@ -195,7 +195,7 @@
         $promptr = Promptr::find($id);
         $shuffle = $_GET['shuffle'];
         $questions = $promptr->getQuestions();
-        if($shuffle == true){
+        if($shuffle == "true"){
             shuffle($questions);
         }
         foreach($questions as $question){
@@ -226,7 +226,7 @@
             if ($question == $last_question)
             {
                 $end_flag = true;
-                Question::deleteTempQuestions();
+
             }
         }
         return $app['twig']->render('question.html.twig', array(
@@ -234,7 +234,7 @@
                                     'end' => $end_flag,
                                     'promptr' => $promptr));
     });
-    
+
 // DISPLAY.HTML.TWIG
 // DISPLAY FINISHED answers to promptr run
 
@@ -242,7 +242,8 @@
 //will show the concatted together display of the list
     $app->get("/promptr/{id}/display", function($id) use ($app){
         $promptr = Promptr::find($id);
-        $questions = $promptr->getQuestions();
+        $questions = Question::getTempQuestions();
+        Question::deleteTempQuestions();
         return $app['twig']->render('display.html.twig',array(
                                     'promptr' => $promptr,
                                     'questions' => $questions));

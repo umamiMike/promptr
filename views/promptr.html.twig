@@ -15,10 +15,17 @@
             <h3>
                 <div class="btn-group inline pull-left">
                 <form action="/promptr/{{ promptr.getId }}/question">
-                    <input type="hidden" 
+                    <input type="hidden" name="shuffle" value="false">
                     <button type="submit" class="btn btn-info"><i class="fa fa-play"></i></button>
                 </form>
-                </div>  Run your promptr
+                </div>
+                <div class="btn-group inline pull-left">
+                    <form action="/promptr/{{ promptr.getId }}/question">
+                        <input type="hidden" name="shuffle" value="true">
+                        <button type="submit" class="btn btn-info"><i class="fa fa-random"></i></button>
+                    </form>
+                </div>
+                    Run your promptr
             </h3>
 
             {% embed "forms/question_form.html.twig" %}
@@ -45,6 +52,7 @@
             <form action="/">
                 <button type="submit" class="btn btn-sm btn-default">Home</button>
             </form>
+
 <!-- embed a text box here to enter a description -->
         </div>
     </body>
