@@ -84,14 +84,12 @@
     $app->get("/", function() use ($app){
         $topics = Topic::getAll();
         $promptrs = Promptr::getAll();
-        // $pop_promptrs = [];
-        // foreach($promptrs as $promptr){
-        //     if($promptr->getTrending() > )
-        // }
-        $pop_promptrs = Promptr::getTrending();
+
+        $pop_promptrs = Promptr::getTrendingPromptrs();
         return $app['twig']->render('index.html.twig', array(
                                     'topics' => $topics,
-                                    'promptrs' => $promptrs));
+                                    'promptrs' => $promptrs,
+                                    'pop_promptrs' => $pop_promptrs));
     });
 // PROMPTR.HTML.TWIG
 // START PAGE for creating a new promptr
