@@ -1,0 +1,31 @@
+forms.css
+
+.formContainer{
+	width:400px;
+
+
+}
+
+.balls{
+	width:500px;
+	border:2px;
+	float:left;
+}
+
+.deletelist button {
+
+	width:20px;
+	border-radius: 10px;
+}
+
+.answer_form textarea{
+
+	width:90%;
+	font-size: 1.5em;
+	font-family: Georgia;
+	line-height: 1.5em;
+  	padding: 5px 8px;
+  	color:#626262;
+  	text-indent: 25px;
+}
+
