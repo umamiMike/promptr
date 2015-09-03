@@ -34,6 +34,19 @@
     });
 
 
+    $app->get("/topic/{id}", function($id) use ($app){
+        $topic = Topic::find($id);
+        $promptrs = $topic->getPromptrs();
+        return $app['twig']->render("topic.html.twig", array('topic' => $topic, 'promptrs' => $promptrs));
+    });
+
+        $app->post("/create-topic", function() use ($app){
+        $topic_name = $_POST['topic_name'];
+        $topic = new Topic($topic_name);
+        $topic->save();
+        $promptrs = $topic->getPromptrs();
+        return $app['twig']->render("topic.html.twig", array('topic' => $topic, 'promptrs' => $promptrs));
+    });
 
 
     $app->get("/promptr/{id}", function($id) use ($app){
@@ -60,7 +73,7 @@
     $app->post("/promptrs", function() use ($app){
         $promptr_name = $_POST['promptr_name'];
         $topic_id = $_POST['topic_id'];
-        $new_promptr = new Promptr($promptr_name);
+        $new_promptr = new Promptr($promptr_name,$topic_id);
         $new_promptr->save();
         return $app['twig']->render('promptrs.html.twig', array (
                                     'promptrs' => Promptr::getAll()));
@@ -72,11 +85,6 @@
     });
 
 
-    $app->get("/topic/{id}", function($id) use ($app){
-        $topic = Topic::find($id);
-        $promptrs = $topic->getPromptrs();
-        return $app['twig']->render("topic.html.twig", array('topic' => $topic, 'promptrs' => $promptrs));
-    });
 
     $app->get("promptr/{id}", function($id) use ($app){
         $promptr = Promptr::find($id);
@@ -135,7 +143,7 @@
                                     'promptr' => $promptr));
     });
 
-
+//will show the concatted together display of the list
     $app->get("/promptr/{id}/display", function($id) use ($app){
 
         $promptr = Promptr::find($id);

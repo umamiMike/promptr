@@ -3,6 +3,7 @@
         <meta charset="utf-8">
         <title>Promptr</title>
         <link rel="stylesheet" href="/css/styles.css" media="screen" charset="utf-8">
+        <link rel="stylesheet" href="/css/forms.css" media="screen" charset="utf-8">
 
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
@@ -11,24 +12,25 @@
         <div class="container">
 
         <h2>Promptr - "{{ promptr.getName }}"</h2>
+        <h3>   <a href="/promptr/{{ promptr.getId }}/question">Run your promptr</a> </h3>
 
-        {% embed "question_form.html.twig" %}
+        {% embed "forms/question_form.html.twig" %}
 
         {% endembed %}
 
         {% if questions is not empty %}
 
               {% for question in questions %}
-              <form  action="/promptr/{{ promptr.getId }}/delete_question/{{ question.getId }}" method="post">
+              <form  class="deletelist" action="/promptr/{{ promptr.getId }}/delete_question/{{ question.getId }}" method="post">
                   <label name="question_id" id="question_id">
                       <input id="question_id" name="_method" type="hidden" value="delete">{{ question.getQuestion }}
                   </label>
-                  <button name="button" type="submit">delete</button>
+                  <button name="button" type="submit">x</button>
               </form>
               {% endfor %}
 
         {% endif %}
-        <a href="/promptr/{{ promptr.getId }}/question">Run your promptr</a>
+
 
 
 <!-- embed a text box here to enter a description -->
