@@ -84,6 +84,11 @@
     $app->get("/", function() use ($app){
         $topics = Topic::getAll();
         $promptrs = Promptr::getAll();
+        // $pop_promptrs = [];
+        // foreach($promptrs as $promptr){
+        //     if($promptr->getTrending() > )
+        // }
+        $pop_promptrs = Promptr::getTrending();
         return $app['twig']->render('index.html.twig', array(
                                     'topics' => $topics,
                                     'promptrs' => $promptrs));
@@ -191,8 +196,11 @@
 // run through a promptr
     // first page of promptr run - displays first question in promptr
     // question array -- takes answer from user
+    // **Trending index gets increased when this route is accessed**
     $app->get("/promptr/{id}/question", function($id) use ($app){
         $promptr = Promptr::find($id);
+        $trending_index = $promptr->getTrending();
+        $promptr->updateTrending(++$trending_index);
         Question::deleteTempQuestions();
         $shuffle = $_GET['shuffle'];
         $questions = $promptr->getQuestions();
