@@ -7,19 +7,25 @@
     </head>
     <body>
 <div class="container">
+<<<<<<< HEAD
+{#
+    {% if topic == true %}
+        {{ include ('create_promptr_form.html.twig',  {topic_list: null} ) }}
+    {% endif %}
+#}
+=======
 
 
         {% embed "forms/create_promptr_form.html.twig" %}
 
         {% endembed %}
 
+>>>>>>> master
         {% for promptr in promptrs  %}
             <a href="promptr/{{ promptr.getId }}"> {{ promptr.getName }}</a>
             <br>
         {%  endfor %}
-
         <br>
-        <a href="/deleteAllPromptrs">delete all promptrs</a>
     </div>
     </body>
 </html>

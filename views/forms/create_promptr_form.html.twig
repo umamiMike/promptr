@@ -1,3 +1,19 @@
+<<<<<<< HEAD:views/create_promptr_form.html.twig
+<div class= "row">    
+        <form  action="/admin" method="post">
+            {% if topic_list != null %}
+                <h3>Select a topic for your promptr</h3>
+                {% for topic in topic_list %}
+                    <input type="radio" id="topic_id" name="topic_id" value="{{ topic.getId }}">{{ topic.getName }}<br>
+                {% endfor %}
+            {% endif %}
+            <div class="form-group">
+                <label for="promptr_name">Create a Promptr</label>
+                <input id="promptr_name" name="promptr_name" type="text" placeholder="Add a Promptr name" class="form-control" required>
+            </div>
+            <button id="button" name="button" class="btn btn-primary">Create</button>
+        </form>
+=======
 <div class= "formContainer">
     <form  action="/promptrs" method="post">
         <div class="form-group">
@@ -13,4 +29,5 @@
     </form>
 
 
+>>>>>>> master:views/forms/create_promptr_form.html.twig
 </div>
