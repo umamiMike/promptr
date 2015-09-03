@@ -151,9 +151,11 @@
     $app->get("/topic/{id}", function($id) use ($app){
         $topic = Topic::find($id);
         $promptrs = $topic->getPromptrs();
+        $allT = Topic::getAll();
         return $app['twig']->render("topic.html.twig", array(
                                     'topic' => $topic,
-                                    'promptrs' => $promptrs));
+                                    'promptrs' => $promptrs,
+                                    'all_topics' => $allT));
     });
 // PROMPTR.HTML.TWIG
 //delete question from NEW PROMPTR route -- then displays promptr page

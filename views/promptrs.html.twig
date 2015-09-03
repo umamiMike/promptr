@@ -7,16 +7,11 @@
     </head>
     <body>
 <div class="container">
-{#
+
     {% if topic == true %}
-        {{ include ('create_promptr_form.html.twig',  {topic_list: null} ) }}
+        {{ include ('forms/create_promptr_form.html.twig',  {topic_list: null} ) }}
     {% endif %}
-#}
 
-
-        {% embed "forms/create_promptr_form.html.twig" %}
-
-        {% endembed %}
 
         {% for promptr in promptrs  %}
             <a href="promptr/{{ promptr.getId }}"> {{ promptr.getName }}</a>
