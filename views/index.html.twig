@@ -35,6 +35,7 @@
                 {% for promptr in promptrs %}
                     <li>
                         <form action="/promptr/{{ promptr.getId }}/question">
+                            <input type="hidden" name="shuffle" value="false">
                             <button type="submit" class="btn btn-default btn-block"><i class="fa fa-play"></i> {{ promptr.getName }}</button>
                         </form>
 
