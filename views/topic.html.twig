@@ -9,24 +9,25 @@
     </head>
     <body>
         <div class="container">
+            {% if topic.getPromptrs is not empty %}
+            <div class="col-md-8">
                 <h2>{{ topic.getName }}: </h2>
+                <ul>
                     {% for promptr in promptrs %}
-                        <a href="/promptr/{{ promptr.getId }}">{{ promptr.getName }}</a>
-                        <br>
+                        <li><a href="/promptr/{{ promptr.getId }}">{{ promptr.getName}}</a></li>
                     {% endfor %}
-
+                </ul>
             </div>
 
-
+            {% else %}
                 <div class= "formContainer">
                     <form  action="/promptrs" method="post">
                         <div class="form-group">
                                     <label class="col-md-4 control-label" for="brand_name">Create a Promptr</label>
                                     <input id="promptr_name" name="promptr_name" type="text" placeholder="Add a Promptr name" class="form-control input-md" required="">
                                     </div>
-                                    <div class="form-group">
-                                    <input type="hidden" id="topic_id" name="topic_id" value="{{ topic.getId }}">
-                                    </div>
+                                    <input type="hidden" name="topic_id" value="{{ topic.getId}}">
+
                                     <!-- Button -->
                                     <div class="form-group">
                                       <label class="col-md-4 control-label" for="button"></label>
@@ -37,7 +38,7 @@
 
                 </div>
 
-
+            {%  endif %}
 <div>
     go to premade id and run
 </div>
