@@ -122,14 +122,15 @@
 // CONTINUE CREATING NEW PROMPTR ROUTE
     $app->post("/promptr/{id}", function($id) use ($app){
         $promptr = Promptr::find($id);
+        $topic = Topic::find($promptr->getTopicId());
         $new_question_text = $_POST['question'];
         $new_description = $_POST['description'];
         $new_question = new Question($new_question_text, $new_description);
         $new_question->save();
-        $promptr->addQuestion($new_question->getId());
+        $promptr->addQuestion($new_question);
         return $app['twig']->render('promptr.html.twig', array (
                                     'promptr' => $promptr,
-                                    'questions' => $promptr->getQuestions()));
+                                    'questions' => $promptr->getQuestions(), 'topic' => $topic));
     });
 // PROMPTRS.HTML.TWIG
 // ADD PROMPTR -- adds a prompter and displays promptrs within the topic
@@ -180,12 +181,13 @@
     $app->delete("/promptr/{id}/delete_question/{qId}", function($id, $qId) use ($app){
         $question_id = $qId;
         $promptr = Promptr::find($id);
+        $topic = Topic::find($promptr->getTopicId());
         $question = Question::findById($question_id);
         $question->delete();
         $questions = $promptr->getQuestions();
         return $app['twig']->render("promptr.html.twig", array(
                                     'promptr' => $promptr,
-                                    'questions' => $questions));
+                                    'questions' => $questions, 'topic' => $topic));
     });
 // QUESTION.HTML.TWIG
 // run through a promptr
@@ -193,11 +195,18 @@
     // question array -- takes answer from user
     $app->get("/promptr/{id}/question", function($id) use ($app){
         $promptr = Promptr::find($id);
-        $first_question = $promptr->getQuestions()[0];
+        $shuffle = false;
+        $questions = $promptr->getQuestions();
+        foreach($questions as $question){
+            $question->saveTempQuestion();
+        }
+        $temp_questions = Question::getTempQuestions();
+        $first_question = $temp_questions[0];
         return $app['twig']->render('question.html.twig', array(
                                     'question' => $first_question,
                                     'promptr' => $promptr));
     });
+
 // QUESTION.HTML.TWIG -- needs fixed -- if a question has been deleted, id # is skipped and
 // end_flag = true. Need to somehow loop through just the questions in promptr->getQuestions
 // the following pages of promptr run -- adding more answers
@@ -208,14 +217,15 @@
         $new_answer = new Answer($answer_field, $quid);
         $new_answer->save();
         ++$quid;
-        $question = Question::findById($quid);
+        $question = Question::findTempById($quid);
         if($question != null){
             $question->addAnswer($new_answer->getId());
-            $questions = $promptr->getQuestions();
+            $questions = Question::getTempQuestions();
             $last_question = end($questions);
             if ($question == $last_question)
             {
                 $end_flag = true;
+                Question::deleteTempQuestions();
             }
         }
         return $app['twig']->render('question.html.twig', array(
