@@ -10,11 +10,25 @@
         <div class="container">
             {{ include ('create_promptr_form.html.twig', { topic_list: topics }) }}
             <br>
-            {# DISPLAY LIST OF UNPOPULATED PROMPTRS THAT NEED QUESTIONS ADDED #}
-            {% for promptr in promptrs %}
-                <a href="/promptr/{{ promptr.getId }}">{{ promptr.getName }}</a><br>
-            {% endfor %}
-
+            {# DISPLAY LIST OF UNPOPULATED PROMPTRS THAT NEED QUESTIONS ADDED (by topic #}
+            {% if promptrs is not empty %}
+                <div class="row">
+                    <ul>
+                        {% for topic in topics %}
+                            {{ topic.getName }}
+                            {% if topic.getPromptrs == null %}
+                                <p>--No promptrs!</p>
+                            {% else %}
+                                {% for promptr in promptrs %}
+                                    {% if promptr.getTopicId == topic.getId %}
+                                        <li><a href="/promptr/{{ promptr.getId }}">{{ promptr.getName }}</a><br></li>
+                                    {% endif %}
+                                {% endfor %}
+                            {% endif %}
+                        {% endfor %}
+                    </ul>
+                </div>
+            {% endif %}
             <div class="row">
                 <form action="/admin" method="post">
                     <label for="_method">Delete all promptrs and return to admin page</label>

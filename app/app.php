@@ -63,7 +63,8 @@
     $app->delete("/admin", function() use ($app){
         Promptr::deleteAll();        
         return $app['twig']->render("promptr-admin.html.twig", array(
-                                    'topics' => Topic::getAll()));
+                                    'topics' => Topic::getAll(),
+                                    'promptrs' => Promptr::getAll()));
     });
 //  UNPOPULATED HOME PAGE -- SHOULD ONLY BE REACHED AFTER DELETE ALL PEFORMED
 // ON ADMIN PAGE    
