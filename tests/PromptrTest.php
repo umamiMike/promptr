@@ -172,6 +172,7 @@
             $question = "What is your biggest weakness punk?";
             $description = "This question goes straight for the jugular";
             $test_question = new Question($question, $description);
+            $test_question->save();
             $test_promptr->addQuestion($test_question);
 
             $result = Question::getAll();
@@ -189,11 +190,13 @@
             $question = "What is your biggest weakness punk?";
             $description = "This question goes straight for the jugular";
             $test_question = new Question($question, $description);
+            $test_question->save();
             $test_promptr->addQuestion($test_question);
 
             $question2 = "Who are you really?";
             $description2 = "I mean really really";
             $test_question2 = new Question($question2, $description2);
+            $test_question2->save();
             $test_promptr->addQuestion($test_question2);
 
             $result = Question::getAll();

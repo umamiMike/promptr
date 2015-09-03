@@ -48,6 +48,12 @@ class Question {
         $this->id = $GLOBALS['DB']->lastInsertId();
     }
 
+    function saveTempQuestion()
+    {
+        $GLOBALS['DB']->exec("INSERT INTO temp_questions (question, description) VALUES ('{$this->getQuestion()}', '{$this->getDescription()}');");
+        $this->id = $GLOBALS['DB']->lastInsertId();
+    }
+
     function delete()
     {
         $GLOBALS['DB']->exec("DELETE FROM questions WHERE id = {$this->getId()};");
@@ -112,6 +118,21 @@ class Question {
     static function deleteAll()
     {
         $GLOBALS['DB']->exec("DELETE FROM questions;");
+    }
+
+    static function getTempQuestions()
+    {
+        $returned_questions = $GLOBALS['DB']->query("SELECT * FROM temp_questions;");
+        //var_dump($returned_questions);
+        $questions = [];
+        foreach($returned_questions as $question){
+            $field = $question['question'];
+            $description = $question['description'];
+            $id = $question['id'];
+            $new_question = new Question($field, $description, $id);
+            array_push($questions, $new_question);
+        }
+        return $questions;
     }
 
 

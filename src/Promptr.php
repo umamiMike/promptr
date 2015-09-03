@@ -124,9 +124,9 @@
             return $found_promptr;
         }
 
-        function addQuestion($question_id)
+        function addQuestion($question)
         {
-            $GLOBALS['DB']->exec("INSERT INTO promptrs_questions (question_id, promptr_id) VALUES ({$question_id}, {$this->getId()});");
+            $GLOBALS['DB']->exec("INSERT INTO promptrs_questions (question_id, promptr_id) VALUES ({$question->getId()}, {$this->getId()});");
         }
 
         function getQuestions()
@@ -146,6 +146,7 @@
             }
             return $questions;
         }
+
 
 
     }

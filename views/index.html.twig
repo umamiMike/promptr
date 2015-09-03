@@ -4,35 +4,49 @@
     <title>Promptr</title>
     <link rel="stylesheet" href="/css/styles.css" media="screen" charset="utf-8">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
   </head>
   <body>
       <div class="container">
           <h1 style="text-align:center">Welcome to Promptr!</h1>
-          <h2>A List of Topics</h2>
-          <div class="col-md-8">
-          <ul>
-            {% for topic in topics %}
-                <li><a href="/topic/{{ topic.getId }}">{{ topic.getName }}</a></li>
+          <div class="col-md-4">
+              <h2>A List of Topics</h2>
+              <ul class="list-unstyled">
+                {% for topic in topics %}
+                    <li>
+                        <form action="/topic/{{ topic.getId }}">
+                            <button type="submit" class="btn btn-default btn-block">{{ topic.getName }}</button>
+                        </form>
 
-            {% endfor %}
-         </ul>
+                    </li>
 
-
-          <h4>Helpful Links</h4>
-          <ul>
-              <li><a href="http://www.writersdigest.com/online-editor/novel-writing-10-questions-you-need-to-ask-your-characters">www.writersdigest.com</a></li>
-              <li><a href="http://www.dailywritingtips.com">www.dailywritingtips.com</a></li>
-          </ul>
+                {% endfor %}
+             </ul>
           </div>
-            <div class="col-md-4">
-                <h3>Popular Promptrs</h3>
-                <ul>
-                    {% for promptr in promptrs %}
-                        <li> <a href="/promptr/{{ promptr.getId }}">{{ promptr.getName}}</a></li>
-                    {% endfor %}
-                </ul?
-            </div>
+
+          <div class="col-md-4">
+          </div>
+
+        <div class="col-md-4">
+            <h3>Popular Promptrs</h3>
+            <ul class="list-unstyled">
+                {% for promptr in promptrs %}
+                    <li>
+                        <form action="/promptr/{{ promptr.getId }}/question">
+                            <button type="submit" class="btn btn-default btn-block"><i class="fa fa-play"></i> {{ promptr.getName }}</button>
+                        </form>
+
+                    </li>
+                {% endfor %}
+            </ul>
+
+            <h4>Helpful Links</h4>
+            <ul>
+                <li><a href="http://www.writersdigest.com/online-editor/novel-writing-10-questions-you-need-to-ask-your-characters">www.writersdigest.com</a></li>
+                <li><a href="http://www.dailywritingtips.com">www.dailywritingtips.com</a></li>
+            </ul>
+        </div>
       </div>
 
   </body>

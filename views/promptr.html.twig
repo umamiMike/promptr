@@ -12,7 +12,12 @@
         <div class="container">
 
             <h2>Promptr - "{{ promptr.getName }}"</h2>
-            <h3>   <a href="/promptr/{{ promptr.getId }}/question"><i class="fa fa-play"></i></a> Run your promptr</h3>
+            <h3>
+                <form action="/promptr/{{ promptr.getId }}/question">
+                    <button type="submit" class="btn btn-info"><i class="fa fa-play"></i></button>
+                </form>
+                Run your promptr
+            </h3>
 
             {% embed "forms/question_form.html.twig" %}
 

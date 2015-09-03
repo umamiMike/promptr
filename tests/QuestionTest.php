@@ -40,6 +40,23 @@
             $this->assertEquals($test_question, $result[0]);
         }
 
+        function test_saveTempQuestion()
+        {
+            //Arrange
+            $test_field = "What is their name?";
+            $test_description = "What you want to call your character.";
+            $test_question = new Question($test_field, $test_description);
+
+            //Act
+            $test_question->saveTempQuestion();
+            //var_dump($test_question);
+
+            //Assert
+            $result = Question::getTempQuestions();
+            //var_dump($result);
+            $this->assertEquals($test_question, $result[0]);
+        }
+
         function test_getAll()
         {
             //Arrange
@@ -165,6 +182,7 @@
 
 
         }
+
 
 
     }
