@@ -4,6 +4,7 @@
     <title>Promptr</title>
     <link rel="stylesheet" href="/css/styles.css" media="screen" charset="utf-8">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-material-design/0.3.0/css/material-fullpalette.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
   </head>
@@ -35,19 +36,21 @@
                 {% for promptr in promptrs %}
                     <li>
                         <form action="/promptr/{{ promptr.getId }}/question">
-                            <input type="hidden" name="shuffle" value="false">
                             <button type="submit" class="btn btn-default btn-block"><i class="fa fa-play"></i> {{ promptr.getName }}</button>
                         </form>
 
                     </li>
                 {% endfor %}
             </ul>
-
-            <h4>Helpful Links</h4>
-            <ul>
-                <li><a href="http://www.writersdigest.com/online-editor/novel-writing-10-questions-you-need-to-ask-your-characters">www.writersdigest.com</a></li>
-                <li><a href="http://www.dailywritingtips.com">www.dailywritingtips.com</a></li>
-            </ul>
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <h4>Helpful Links</h4>
+                    <ul>
+                        <li><a href="http://www.writersdigest.com/online-editor/novel-writing-10-questions-you-need-to-ask-your-characters">www.writersdigest.com</a></li>
+                        <li><a href="http://www.dailywritingtips.com">www.dailywritingtips.com</a></li>
+                    </ul>
+                </div>
+            </div>
         </div>
       </div>
 

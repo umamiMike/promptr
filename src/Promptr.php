@@ -108,13 +108,10 @@
                     $example = $promptr['example'];
                     $id = $promptr['id'];
                     $new_P = new Promptr($name, $topic_id, $trending, $example, $id);
-                    //$new_P->save();
                     array_push($top, $new_P);
-                    //$top_five = array_reverse($top);
                     ++$count;
                 }
             }
-            //return $top_five;
             return $top;
         }
 

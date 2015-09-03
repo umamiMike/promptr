@@ -1,9 +1,10 @@
 <html>
     <head>
         <title>Promptr Questions</title>
-        <link rel="stylesheet" href="/css/styles.css" media="screen" charset="utf-8">
         <link rel="stylesheet" href="/css/forms.css" media="screen" charset="utf-8">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-material-design/0.3.0/css/material-fullpalette.css">
+        <link rel="stylesheet" href="/css/styles.css" media="screen" charset="utf-8">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
     </head>
     <body>
@@ -16,8 +17,22 @@
 
                 {% endembed %}
             {% else %}
+                {#
                 <h3>You have finished running through the "{{ promptr.getName }}" promptr!</h3>
                 <a href="/promptr/{{ promptr.getId }}/display">Display</a>
+                #}
+                {% if promptr != null %}
+                    {% for question in questions %}
+                        <h3>    {{ question.getQuestion }} </h3>
+                        {% for answer in question.getAnswers  %}
+                            <h5>    {{ answer.getAnswer }} </h5>
+                        {% endfor %}
+                    {% endfor %}
+
+                    <form action="/promptr/{{ promptr.getId }}">
+                        <button type="submit" class="btn btn-mini btn-info">Home</button>
+                    </form>
+                {% endif %}
             {% endif %}
 
 

@@ -241,7 +241,6 @@
 
             //Act
             $result = Promptr::getTrendingPromptrs();
-            var_dump($result);
 
             //Assert
             $this->assertEquals([$test_promptr6, $test_promptr5, $test_promptr4, $test_promptr3, $test_promptr2], $result);

@@ -73,7 +73,7 @@
         Topic::deleteAll();
         Question::deleteAll();
         Answer::deleteAll();
-        return $app['twig']->render('index.html.twig');
+        return $app['twig']->render('index.html.twig', array('topics' => Topic::getAll(), 'promptrs' => Promptr::getAll()));
     });
 /////////////////////////////////////////////////////////////////
 /////////////////// END ADMIN PAGES /////////////////////////////
@@ -201,6 +201,7 @@
         $promptr = Promptr::find($id);
         $trending_index = $promptr->getTrending();
         $promptr->updateTrending(++$trending_index);
+        Question::deleteTempQuestions();
         $shuffle = $_GET['shuffle'];
         $questions = $promptr->getQuestions();
         if($shuffle == "true"){
@@ -227,20 +228,19 @@
         $new_answer->save();
         ++$quid;
         $question = Question::findTempById($quid);
+        $questions = Question::getTempQuestions();
         if($question != null){
             $question->addAnswer($new_answer->getId());
-            $questions = Question::getTempQuestions();
             $last_question = end($questions);
             if ($question == $last_question)
             {
                 $end_flag = true;
-
             }
         }
         return $app['twig']->render('question.html.twig', array(
                                     'question' => $question,
                                     'end' => $end_flag,
-                                    'promptr' => $promptr));
+                                    'promptr' => $promptr, 'questions' => $questions));
     });
 
 // DISPLAY.HTML.TWIG
