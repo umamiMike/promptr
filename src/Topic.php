@@ -28,7 +28,8 @@
 
         function save()
         {
-            $GLOBALS['DB']->exec("INSERT INTO topics (name) VALUES ('{$this->getName()}');");
+            $temp_name = str_replace(["'"], "''", $this->getName());
+            $GLOBALS['DB']->exec("INSERT INTO topics (name) VALUES ('{$temp_name}');");
             $this->id = $GLOBALS['DB']->lastInsertId();
         }
 
@@ -95,7 +96,7 @@
             $GLOBALS['DB']->exec("INSERT INTO promptrs (name, topic_id, trending, example) VALUES ('{$promptr->getName()}',{$promptr->getTopicId()},{$promptr->getTrending()}, {$promptr->getExample()});");
         }
 
-        
+
     }
 
 
