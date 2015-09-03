@@ -19,29 +19,35 @@
 
     use Symfony\Component\HttpFoundation\Request;
     Request::enableHttpMethodParameterOverride();
-
-
+// PROMPTR.ADMIM.TWIG
+// this route is manually entered and used only to populate the database
     $app->get("/admin", function() use ($app){
         $topics = Topic::getAll();
         $promptrs = Promptr::getAll();
-        return $app['twig']->render('promptr-admin.twig', array('topics' => $topics, 'promptrs' => $promptrs));
+        return $app['twig']->render('promptr-admin.twig', array(
+                                    'topics' => $topics, 
+                                    'promptrs' => $promptrs));
     });
-
+// INDEX.HTML.TWIG
+// home page displays list of topics, popular promptrs, and option to create a new promptr
     $app->get("/", function() use ($app){
         $topics = Topic::getAll();
         $promptrs = Promptr::getAll();
-        return $app['twig']->render('index.html.twig', array('topics' => $topics, 'promptrs' => $promptrs));
+        return $app['twig']->render('index.html.twig', array(
+                                    'topics' => $topics, 
+                                    'promptrs' => $promptrs));
     });
-
-
-
-
+// PROMPTR.HTML.TWIG
+// START PAGE for creating a new promptr
     $app->get("/promptr/{id}", function($id) use ($app){
         $promptr = Promptr::find($id);
-        return $app['twig']->render('promptr.html.twig', array ('promptr' => $promptr,'questions' => $promptr->getQuestions()));
+        return $app['twig']->render('promptr.html.twig', array (
+                                    'promptr' => $promptr,
+                                    'questions' => $promptr->getQuestions()));
 
     });
-    // will populate a promptr with questions/descriptions
+// PROMPTR.HTML.TWIG 
+// CONTINUE CREATING NEW PROMPTR ROUTE
     $app->post("/promptr/{id}", function($id) use ($app){
         $promptr = Promptr::find($id);
         $new_question_text = $_POST['question'];
@@ -52,11 +58,9 @@
         return $app['twig']->render('promptr.html.twig', array (
                                     'promptr' => $promptr,
                                     'questions' => $promptr->getQuestions()));
-
     });
-
-    // run through a promptr
-
+// PROMPTRS.HTML.TWIG
+// ADD PROMPTR -- adds a prompter and displays promptrs within the topic
     $app->post("/promptrs", function() use ($app){
         $promptr_name = $_POST['promptr_name'];
         $topic_id = $_POST['topic_id'];
@@ -65,48 +69,47 @@
         return $app['twig']->render('promptrs.html.twig', array (
                                     'promptrs' => Promptr::getAll()));
     });
-
+// PROMPTRS.HTML.TWIG
+// DELETE ALL PROMPTRS -- ADMIN ONLY (no duh)
     $app->get("/deleteAllPromptrs", function() use ($app){
         Promptr::deleteAll();
-        return $app['twig']->render('promptrs.html.twig', array ('promptrs' => Promptr::getAll()));
+        return $app['twig']->render('promptrs.html.twig', array (
+                                    'promptrs' => Promptr::getAll()));
     });
-
-
+// TOPIC.HTML.TWIG
+// TOPIC MAIN PAGE -- display all promptrs within a specific topic
     $app->get("/topic/{id}", function($id) use ($app){
         $topic = Topic::find($id);
         $promptrs = $topic->getPromptrs();
-        return $app['twig']->render("topic.html.twig", array('topic' => $topic, 'promptrs' => $promptrs));
+        return $app['twig']->render("topic.html.twig", array(
+                                    'topic' => $topic, 
+                                    'promptrs' => $promptrs));
     });
-
-    $app->get("promptr/{id}", function($id) use ($app){
-        $promptr = Promptr::find($id);
-        $questions = $promptr->getQuestions();
-        return $app['twig']->render("promptr.html.twig", array('promptr' => $promptr, 'questions' => $questions));
-    });
-
-//delete question route
+// PROMPTR.HTML.TWIG
+//delete question from NEW PROMPTR route -- then displays promptr page
     $app->delete("/promptr/{id}/delete_question/{qId}", function($id, $qId) use ($app){
         $question_id = $qId;
         $promptr = Promptr::find($id);
         $question = Question::findById($question_id);
         $question->delete();
         $questions = $promptr->getQuestions();
-        return $app['twig']->render("promptr.html.twig", array('promptr' => $promptr, 'questions' => $questions));
+        return $app['twig']->render("promptr.html.twig", array(
+                                    'promptr' => $promptr, 
+                                    'questions' => $questions));
     });
-
-
+// QUESTION.HTML.TWIG
+// run through a promptr
     // first page of promptr run - displays first question in promptr
-    // question array
+    // question array -- takes answer from user
     $app->get("/promptr/{id}/question", function($id) use ($app){
         $promptr = Promptr::find($id);
         $first_question = $promptr->getQuestions()[0];
         return $app['twig']->render('question.html.twig', array(
                                     'question' => $first_question,
                                     'promptr' => $promptr));
-
     });
-
-    // following pages of promptr run
+// QUESTION.HTML.TWIG
+// the following pages of promptr run -- adding more answers
     $app->post("/promptr/{id}/question/{quid}", function($id, $quid) use ($app){
         $end_flag = false;
         $answer_field = $_POST['answer'];
@@ -116,33 +119,27 @@
         $question = Question::findById($quid);
         $promptr = Promptr::find($id);
         if($question != null){
-
             $question->addAnswer($new_answer->getId());
-
             $questions = $promptr->getQuestions();
             $last_question = end($questions);
-
-
             if ($question == $last_question)
             {
                 $end_flag = true;
             }
         }
-
         return $app['twig']->render('question.html.twig', array(
                                     'question' => $question,
                                     'end' => $end_flag,
                                     'promptr' => $promptr));
     });
-
-
+// DISPLAY.HTML.TWIG
+// DISPLAY FINISHED answers to promptr run
     $app->get("/promptr/{id}/display", function($id) use ($app){
-
         $promptr = Promptr::find($id);
         $questions = $promptr->getQuestions();
-
-        return $app['twig']->render('display.html.twig',array('promptr' => $promptr, 'questions' => $questions));
-
+        return $app['twig']->render('display.html.twig',array(
+                                    'promptr' => $promptr, 
+                                    'questions' => $questions));
     });
 
     return $app;
