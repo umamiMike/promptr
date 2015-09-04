@@ -7,7 +7,13 @@ body {background: #F0F0F0;}
     background-color:#E86E2C !important;
     color:white;
 }
+#indextext{
 
+    color:gray;
+    margin-top: 4px;
+
+
+}
 
 
 textarea {

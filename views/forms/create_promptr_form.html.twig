@@ -4,7 +4,7 @@
 
         <form  action="/admin" method="post">
             {% for topic in topic_list %}
-                <input type="radio" id="topic_id" name="topic_id" value="{{ topic.getId }}">{{ topic.getName }}<br>
+                <input type="radio" id="topic_id" name="topic_id" value="{{ topic.getId }}"><br>
             {% endfor %}
             <div class="form-group">
                 <label for="promptr_name">Create a Promptr</label>
@@ -14,13 +14,13 @@
         </form>
 
     {% else %}
-        {{ topic.getName }}
+    
         <div class= "formContainer">
             <form  action="/topic/{{ topic.getId }}" method="post">
                 <div class="form-group">
                     <input type="hidden"  id="topic_id" name="topic_id" value="{{ topic.getId }}">
                     <label class="col-md-4 control-label" for="promptr_name">Create a Promptr</label>
-                    <input id="promptr_name" name="name" type="text" placeholder="Add a Promptr name" class="form-control input-md" required>
+                    <input id="promptr_name" name="name" title = "a promptr is a collection of questions." type="text" placeholder="Add a Promptr name" class="form-control input-md" required>
                 </div>
                     <label class="col-md-4 control-label" for="promptr_name"></label>
                     <button id="button" name="button" class="btn btn-primary">Create</button>

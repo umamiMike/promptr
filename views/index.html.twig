@@ -15,6 +15,13 @@
                   <h1 style="text-align:center">Welcome to Promptr!</h1>
               </div>
           </div>
+          <div class="panel">
+              <div class="panel-body" id="indextext">
+                  <h4>A Promptr is a collection of questions or prompts to help you brainstorm an idea or write a letter.  Load a promptr with prompts or questions and hit play. set your browser to fullscreen and let your mind go on an adventure. <br><br>
+
+                    There is even a shuffle option.  It is purposefully open ended.  Have fun!</h4>
+              </div>
+          </div>
 
           <div class="col-md-4">
               <h2>A List of Topics</h2>
@@ -41,6 +48,7 @@
                 {% for promptr in pop_promptrs %}
                     <li>
                         <form action="/promptr/{{ promptr.getId }}/question">
+                          <input type="hidden" name="shuffle" value="false">
                             <button type="submit" class="btn btn-default btn-block"><i class="fa fa-play"></i> {{ promptr.getName }}</button>
                         </form>
 
