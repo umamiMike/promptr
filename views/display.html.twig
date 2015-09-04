@@ -10,10 +10,12 @@
       <div class="container">
                     {% if promptr != null %}
                         {% for question in questions %}
+
                             {% for answer in question.getAnswers  %}
                         <h3>    {{ question.getQuestion }} </h3>
                         <h5>    {{ answer.getAnswer }} </h5>
                             {% endfor %}
+                          </div>
                         {% endfor %}
 
                         <form action="/promptr/{{ promptr.getId }}">

@@ -20,6 +20,10 @@
                 {% embed "forms/answer_form.html.twig" %}
 
                 {% endembed %}
+                <form action="/promptr/{{ promptr.getId }}">
+                    <button type="submit" class="btn btn-mini btn-info">Return to Promptr</button>
+                </form>
+
             {% else %}
                 {#
                 <h3>You have finished running through the "{{ promptr.getName }}" promptr!</h3>

@@ -7,6 +7,12 @@ body {background: #F0F0F0;}
     background-color:#E86E2C !important;
     color:white;
 }
+#panel-three{
+  background-color:#E39C6D !important;
+}
+#questions-panel{
+  background-color:#ABCDEF !important;
+}
 #indextext{
 
     color:gray;

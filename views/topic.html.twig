@@ -51,18 +51,23 @@
                             </tr>
 
                         {% endfor %}
+                        <tr>
+                          <td>
 
-                                <a  href="/">Home</a>
+                            <a  href="/">Home</a>
+                          </td>
+
+                        </tr>
+
                     </tbody>
             </div>
-
             {% else %}
                 <h4>There aren't any promptrs yet.  Would you like to make one?</h4><br>
                 {{ include ('forms/create_promptr_form.html.twig', { topic_list: 'null', curr_topic : topic}) }}
+                <a  href="/">Home</a>
             {%  endif %}
-            <div>
-
-            </div>
+        </div>
+        <div>
         </div>
     </body>
 </html>
