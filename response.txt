@@ -1,0 +1,20 @@
+What is the name of the app
+Promptr
+
+what is your favorite part?
+That it works at all....and is super pretty.
+
+What does it do?
+It makes questions for you to ask yourself so you can figure out what you are thinking.
+
+Is it easy to use?
+It is getting there.
+
+How long did it take to create?
+4 days at this point.
+
+what do you still have to work on?
+Lots. Glad to be learning javascript.
+
+Who are the contributors?
+Mike Ian Chris Don.

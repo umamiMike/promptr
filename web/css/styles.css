@@ -3,6 +3,10 @@ html{
 }
 
 body {background: #F0F0F0;}
+#run{
+    background-color:#E86E2C !important;
+    color:white;
+}
 
 
 
@@ -29,6 +33,8 @@ textarea {
   line-height: 1.3em;
   padding: 5px 8px;
   transition: background-color 0.2s ease 0s;
+  autofocus = "on";
+  text-indent: 4em;
 }
 
 

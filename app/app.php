@@ -99,6 +99,16 @@
         return $app['twig']->render("topic.html.twig", array('topic' => $topic, 'promptrs' => $promptrs));
     });
 
+    $app->post("/topic/{id}", function($id) use ($app){
+    $topic = Topic::find($id);
+    $name = $_POST['name'];
+    $promptr = new Promptr($name, $topic->getId());
+    $promptr->save();
+    $promptrs = Promptr::getAll();
+    return $app['twig']->render('topic.html.twig', array('topic' => $topic, 'promptrs' => $promptrs));
+
+    });
+
         $app->post("/create-topic", function() use ($app){
         $topic_name = $_POST['topic_name'];
         $topic = new Topic($topic_name);
@@ -209,12 +219,13 @@
         }
         if ($questions == []){
             return $app['twig']->render("promptr.html.twig", array('promptr' => $promptr, 'questions' => $questions, 'topic' => Topic::find($promptr->getTopicId())));
-        }
+        }else{
         $temp_questions = Question::getTempQuestions();
         $first_question = $temp_questions[0];
         return $app['twig']->render('question.html.twig', array(
                                     'question' => $first_question,
                                     'promptr' => $promptr));
+        }
     });
 
 // QUESTION.HTML.TWIG -- needs fixed -- if a question has been deleted, id # is skipped and

@@ -2,10 +2,11 @@
 <div class="answer_form">
     <form action="/promptr/{{ promptr.getId }}/question/{{ question.getId }}" method="post">
        <div class="form-group">
-        <textarea placeholder="Put your thoughts here"  name="answer" id="answer" class="form-group" autocomplete="off" role="textbox" aria-autocomplete="list" aria-haspopup="true"></textarea>
+        <textarea autofocus h
+        placeholder="Put your thoughts here"  name="answer" id="answer" class="form-group" autocomplete="off" role="textbox" aria-autocomplete="list" aria-haspopup="true"></textarea>
 		</div>
 		<div class="form-group">
-        <button id="button" name="button" class="btn btn-primary">Next</button>
+        <button id="run" name="button" class="btn btn-default btn-block" >Next</button>
         </div>
     </form>
 </div>

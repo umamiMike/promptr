@@ -10,8 +10,12 @@
     <body>
         <div class="container">
             {% if question %}
-               <h2> {{ question.getQuestion }}</h2><br>
-                <h3>{{ question.getDescription }}</h3><br>
+                <div class="panel panel-warning" id="run">
+                    <div class="panel-heading" id="run">
+                        <h2> {{ question.getQuestion }}</h2><br>
+                        <h3>{{ question.getDescription }}</h3><br>
+                    </div>
+                </div>
 
                 {% embed "forms/answer_form.html.twig" %}
 
@@ -36,7 +40,7 @@
                     {% endfor %}
 
                     <form action="/promptr/{{ promptr.getId }}">
-                        <button type="submit" class="btn btn-mini btn-info">Home</button>
+                        <button type="submit" class="btn btn-mini btn-info">Return to Promptr</button>
                     </form>
                 {% endif %}
             {% endif %}
