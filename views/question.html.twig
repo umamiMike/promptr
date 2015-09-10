@@ -1,13 +1,19 @@
 <html>
     <head>
         <title>Promptr Questions</title>
-        <link rel="stylesheet" href="/css/forms.css" media="screen" charset="utf-8">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-material-design/0.3.0/css/material-fullpalette.css">
         <link rel="stylesheet" href="/css/styles.css" media="screen" charset="utf-8">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+        <script src="https://code.jquery.com/ui/1.11.3/jquery-ui.min.js"></script>
+        <script src="/js/question.js"></script>
     </head>
     <body>
+                   <div class="panal panel-default"> 
+                        <form action="/promptr/{{ promptr.getId }}">
+                                           <button type="submit" class="btn btn-mini btn-info">Return to Promptr</button>
+                        </form>
+                   </div>
         <div class="container">
             {% if question %}
                 <div class="panel panel-warning" id="run">
@@ -30,10 +36,13 @@
                 <a href="/promptr/{{ promptr.getId }}/display">Display</a>
                 #}
                 {% if promptr != null %}
+                <div id="sortable">  
                     {% for question in questions %}
-                        <div class="panel panel-default">
-                            <div class="panel-heading">
-                                <h3>    {{ question.getQuestion }} </h3>
+                                          
+                            <div class="panel panel-default">
+                            <div class="panel-heading" >
+                                <h3>    {{ question.getQuestion }} </h3> 
+                                <p> {{ question.getDescription }} </p>
                             </div>
                             {% for answer in question.getAnswers  %}
                                     <div class="panel-body">
@@ -42,10 +51,7 @@
                             {% endfor %}
                         </div>
                     {% endfor %}
-
-                    <form action="/promptr/{{ promptr.getId }}">
-                        <button type="submit" class="btn btn-mini btn-info">Return to Promptr</button>
-                    </form>
+                    </div>
                 {% endif %}
             {% endif %}
 
