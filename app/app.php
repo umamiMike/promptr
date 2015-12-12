@@ -6,20 +6,35 @@
     require_once __DIR__."/../src/Promptr.php";
 
     $app = new Silex\Application();
-
+    $mount = "/promptr";
+//var_dump($app);
     $app['debug'] = true;
-
+var_dump(__DIR__);
     $server = 'mysql:host=localhost;dbname=promptr_app';
-    $username = 'root';
-    $password = 'root';
+    $username = 'balls';
+    $password = 'face';
     $DB = new PDO($server, $username, $password);
 
     $app->register(new Silex\Provider\TwigServiceProvider(), array(
       'twig.path' => __DIR__.'/../views'));
 
+    $app->register(new Silex\Provider\UrlGeneratorServiceProvider());
+
     use Symfony\Component\HttpFoundation\Request;
     Request::enableHttpMethodParameterOverride();
 
+    // INDEX.HTML.TWIG
+    // home page displays list of topics, popular promptrs, and option to create a new promptr
+    $app->get($mount."/", function() use ($app){
+      $topics = Topic::getAll();
+      $promptrs = Promptr::getAll();
+      $pop_promptrs = Promptr::getTrendingPromptrs();
+      return $app['twig']->render('index.html.twig', array(
+        'topics' => $topics,
+        'promptrs' => $promptrs,
+        'pop_promptrs' => $pop_promptrs));
+      });
+      // PROMPTR.HTML.TWIG
 /////////////////////////////////////////////////////////////////
 ////////////////// BEGIN ADMIN PAGES ////////////////////////////
 /////////////////////////////////////////////////////////////////
@@ -79,27 +94,15 @@
 /////////////////// END ADMIN PAGES /////////////////////////////
 /////////////////////////////////////////////////////////////////
 
-// INDEX.HTML.TWIG
-// home page displays list of topics, popular promptrs, and option to create a new promptr
-    $app->get("/", function() use ($app){
-        $topics = Topic::getAll();
-        $promptrs = Promptr::getAll();
-        $pop_promptrs = Promptr::getTrendingPromptrs();
-        return $app['twig']->render('index.html.twig', array(
-                                    'topics' => $topics,
-                                    'promptrs' => $promptrs,
-                                    'pop_promptrs' => $pop_promptrs));
-    });
-// PROMPTR.HTML.TWIG
 // START PAGE for creating a new promptr
 
-    $app->get("/topic/{id}", function($id) use ($app){
+    $app->get($mount."/topic/{id}", function($id) use ($app){
         $topic = Topic::find($id);
         $promptrs = $topic->getPromptrs();
         return $app['twig']->render("topic.html.twig", array('topic' => $topic, 'promptrs' => $promptrs));
     });
 
-    $app->post("/topic/{id}", function($id) use ($app){
+    $app->post($mount."/topic/{id}", function($id) use ($app){
     $topic = Topic::find($id);
     $name = $_POST['name'];
     $promptr = new Promptr($name, $topic->getId());
