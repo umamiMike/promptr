@@ -4,16 +4,14 @@
     require_once __DIR__."/../src/Answer.php";
     require_once __DIR__."/../src/Topic.php";
     require_once __DIR__."/../src/Promptr.php";
+    require_once "config.php";
 
     $app = new Silex\Application();
     $mount = "/promptr";
 //var_dump($app);
     $app['debug'] = true;
 var_dump(__DIR__);
-    $server = 'mysql:host=localhost;dbname=promptr_app';
-    $username = 'balls';
-    $password = 'face';
-    $DB = new PDO($server, $username, $password);
+
 
     $app->register(new Silex\Provider\TwigServiceProvider(), array(
       'twig.path' => __DIR__.'/../views'));

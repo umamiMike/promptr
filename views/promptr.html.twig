@@ -2,7 +2,7 @@
     <head>
         <meta charset="utf-8">
         <title>Promptr</title>
-        <link rel="stylesheet" href="{{ app.asset_path }}/web/css/styles.css" media="screen" charset="utf-8">
+        <link rel="stylesheet" href="web/css/styles.css" media="screen" charset="utf-8">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-material-design/0.3.0/css/material-fullpalette.css">
@@ -49,7 +49,7 @@
                 </div>
                 <div class="panel-body" id="questions-panel">
                     <table class="table table-striped table-hover">
-                        <tbody>
+                        <tbody id="sortable">
                             <tr>
                               {% for question in questions %}
                               <td>{{ question.getQuestion }}</td>
@@ -85,5 +85,15 @@
 
 <!-- embed a text box here to enter a description -->
         </div>
+        <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+        <script type="text/javascript" src="web/js/sortable.js"></script>
+        <script type="text/javascript">
+
+        $(document).ready(function(){
+            var list = document.getElementById("sortable");
+            Sortable.create(list);
+        });
+
+        </script>
     </body>
 </html>
