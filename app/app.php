@@ -11,8 +11,8 @@
     $app['debug'] = true;
 
     $server = 'mysql:host=localhost;dbname=umamimed_promptr_app';
-    $username = 'root';
-    $password = 'root';
+    $username = 'umamimed_promptr';
+    $password = 'pr0mptr';
     $DB = new PDO($server, $username, $password);
 
     $app->register(new Silex\Provider\TwigServiceProvider(), array(
