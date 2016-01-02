@@ -7,11 +7,7 @@
     require_once "config.php";
 
     $app = new Silex\Application();
-    $mount = "/promptr";
-//var_dump($app);
     $app['debug'] = true;
-var_dump(__DIR__);
-
 
     $app->register(new Silex\Provider\TwigServiceProvider(), array(
       'twig.path' => __DIR__.'/../views'));
@@ -23,7 +19,7 @@ var_dump(__DIR__);
 
     // INDEX.HTML.TWIG
     // home page displays list of topics, popular promptrs, and option to create a new promptr
-    $app->get($mount."/", function() use ($app){
+    $app->get("/", function() use ($app){
       $topics = Topic::getAll();
       $promptrs = Promptr::getAll();
       $pop_promptrs = Promptr::getTrendingPromptrs();
@@ -94,13 +90,13 @@ var_dump(__DIR__);
 
 // START PAGE for creating a new promptr
 
-    $app->get($mount."/topic/{id}", function($id) use ($app){
+    $app->get("/topic/{id}", function($id) use ($app){
         $topic = Topic::find($id);
         $promptrs = $topic->getPromptrs();
         return $app['twig']->render("topic.html.twig", array('topic' => $topic, 'promptrs' => $promptrs));
     });
 
-    $app->post($mount."/topic/{id}", function($id) use ($app){
+    $app->post("/topic/{id}", function($id) use ($app){
     $topic = Topic::find($id);
     $name = $_POST['name'];
     $promptr = new Promptr($name, $topic->getId());
