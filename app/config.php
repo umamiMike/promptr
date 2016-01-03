@@ -1,7 +1,7 @@
 <?php
 $server = 'mysql:host=localhost;dbname=promptr_app';
 $username = 'balls';
-$password = 'face';
+$password = 'faced';
 $DB = new PDO($server, $username, $password);
 
  ?>
