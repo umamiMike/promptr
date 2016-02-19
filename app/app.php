@@ -20,7 +20,6 @@
     // INDEX.HTML.TWIG
     // home page displays list of topics, popular promptrs, and option to create a new promptr
     $app->get("/", function() use ($app){
-      var_dump(__DIR__);
       $topics = Topic::getAll();
       $promptrs = Promptr::getAll();
       $pop_promptrs = Promptr::getTrendingPromptrs();
