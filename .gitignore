@@ -2,3 +2,4 @@
 *.sql
 !barebones.sql
 app/config.php
+web/.htaccess
