@@ -1,1 +1,4 @@
 /vendor
+*.sql
+!barebones.sql
+app/config.php
