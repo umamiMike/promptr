@@ -1,33 +1,34 @@
-html{
-    height: 100%;
+html {
+  height: 100%;
 }
 
-body {background: #F0F0F0;}
-#run{
-    background-color:#E86E2C !important;
-    color:white;
-}
-#panel-three{
-  background-color:#E39C6D !important;
-}
-#questions-panel{
-  background-color:#ABCDEF !important;
-}
-#indextext{
-
-    color:gray;
-    margin-top: 4px;
-
-
+body {
+  background: #F0F0F0;
 }
 
+#run {
+  background-color: #E86E2C !important;
+  color: white;
+}
+
+#panel-three {
+  background-color: #E39C6D !important;
+}
+
+#questions-panel {
+  background-color: #ABCDEF !important;
+}
+
+#indextext {
+  color: gray;
+  margin-top: 4px;
+}
 
 textarea {
   margin-top: 10px;
   width: 100%;
-  height:70%;
- /* margin-left: 50px;*/
-
+  height: 70%;
+  /* margin-left: 50px;*/
   -moz-border-bottom-colors: none;
   -moz-border-left-colors: none;
   -moz-border-right-colors: none;
@@ -45,12 +46,11 @@ textarea {
   line-height: 1.3em;
   padding: 5px 8px;
   transition: background-color 0.2s ease 0s;
-  autofocus = "on";
+  autofocus: on;
   text-indent: 4em;
 }
 
-
 textarea:focus {
-    background: none repeat scroll 0 0 #FFFFFF;
-    outline-width: 0;
+  background: none repeat scroll 0 0 #FFFFFF;
+  outline-width: 0;
 }
