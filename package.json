@@ -1,0 +1,32 @@
+{
+  "name": "promptr",
+  "version": "0.0.2",
+  "description": "prompt yourself to write",
+  "main": "app.js",
+  "directories": {
+    "test": "tests"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/umamiMike/promptr.git"
+  },
+  "keywords": [
+    "php",
+    "javascript",
+    "fun",
+    "times"
+  ],
+  "author": "Mike Chastain",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/umamiMike/promptr/issues"
+  },
+  "homepage": "https://github.com/umamiMike/promptr#readme",
+  "devDependencies": {
+    "gulp": "^3.9.1",
+    "gulp-sass": "^2.2.0"
+  }
+}

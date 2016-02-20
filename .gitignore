@@ -3,3 +3,4 @@
 !barebones.sql
 app/config.php
 web/.htaccess
+node_modules/
