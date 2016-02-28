@@ -5,14 +5,9 @@
     */
     //All tests passed
 
-    require_once "src/Question.php";
-    require_once 'src/Answer.php';
-
-    $server = 'mysql:host=localhost;dbname=promptr_app_test';
-    $username = 'root';
-    $password = 'root';
-    $DB = new PDO($server, $username, $password);
-
+    require_once "model/Question.php";
+    require_once 'model/Answer.php';
+    require_once 'testConnect.php';
 
     class QuestionTest extends PHPUnit_Framework_TestCase
     {

@@ -4,14 +4,11 @@
     * @backupStaticAttributes disabled
     */
 
-    require_once "src/Promptr.php";
-    require_once "src/Topic.php";
-    require_once "src/Question.php";
+    require_once "model/Promptr.php";
+    require_once "model/Topic.php";
+    require_once "model/Question.php";
+    require_once 'testConnect.php';
 
-    $server = 'mysql:host=localhost;dbname=promptr_app_test';
-    $username = 'root';
-    $password = 'root';
-    $DB = new PDO($server, $username, $password);
 
     class PromptrTest extends PHPUnit_Framework_TestCase
     {
